@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="nav_View">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_home"
+            android:enabled="true"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/home"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_profile"
+            android:enabled="true"
+            android:title="@string/profile"
+            android:icon="@drawable/ic_person_black_24dp"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_settings"
+            android:enabled="true"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/settings"
+            app:showAsAction="never" />
+
+    </group>
+    <item android:title="General">
+        <menu>
+            <item
+                android:id="@+id/action_share"
+                android:enabled="true"
+                android:title="@string/share"
+                android:icon="@drawable/ic_share_black_24dp"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_support"
+                android:title="@string/support"
+                android:icon="@drawable/ic_build_black_24dp"
+                android:enabled="true"
+                app:showAsAction="never"/>
+
+            <item
+                android:id="@+id/action_logout"
+                android:title="@string/logout"
+                android:icon="@drawable/ic_power_settings_new_black_24dp"
+                android:enabled="true"
+                app:showAsAction="never"/>
+
+        </menu>
+    </item>
+
+</menu>
