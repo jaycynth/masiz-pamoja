@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">MasizPamoja</string>
+    <string name="app_name">Masiz Pamoja</string>
+    <string name="logo">Logo</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="forgot_password">Forgot your Password?</string>
+    <string name="sign_in_statement">Already have an Account?</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="your_email">Email</string>
+    <string name="full_name">Full names</string>
+    <string name="hint_for_user">e.g. 0700000000</string>
 </resources>

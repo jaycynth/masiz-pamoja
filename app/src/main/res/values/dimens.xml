@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="activity_large_margin">32dp</dimen>
+    <dimen name="activity_small_margin">2dp</dimen>
+    <dimen name="logo_text_size">20sp</dimen>
+    <dimen name="medium_margin">6dp</dimen>
+    <dimen name="field_text_size">16sp</dimen>
+</resources>
