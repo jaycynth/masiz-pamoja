@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="@dimen/activity_margin"
+    android:layout_margin="@dimen/medium_margin"
+    android:fillViewport="true"
     tools:context=".views.fragments.Home">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="200dp">
         <LinearLayout
+            android:layout_margin="@dimen/activity_margin"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ttffv"/>
+            android:text="@string/full_name"/>
 
         </LinearLayout>
 
@@ -24,11 +31,61 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_actions_recyclerView"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/activity_margin"
         android:layout_height="wrap_content">
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/more_info"
+        android:textSize="@dimen/field_text_size"
+        android:textStyle="bold"
+        android:layout_margin="@dimen/activity_margin"
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:id="@+id/who_we_are"
+        android:padding="32dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/activity_margin"
+            android:text="@string/who_are_we"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:clickable="true"
+        android:focusable="true"
+        android:id="@+id/what_do_we_do"
+        android:padding="32dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/activity_margin"
+            android:text="@string/what_do_we_do"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
 
 
-</LinearLayout>
+
+</ScrollView>
