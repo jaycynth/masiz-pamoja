@@ -16,7 +16,11 @@ import android.view.ViewGroup;
 import com.google.android.material.card.MaterialCardView;
 import com.julie.masizpamoja.R;
 import com.julie.masizpamoja.adapters.MainAdapter;
+import com.julie.masizpamoja.adapters.RandomBlogAdapter;
 import com.julie.masizpamoja.models.MainAction;
+import com.julie.masizpamoja.models.RandomBlogs;
+import com.julie.masizpamoja.utils.MainActionData;
+import com.julie.masizpamoja.utils.RandomBlogsData;
 import com.julie.masizpamoja.views.activities.AboutUs;
 import com.julie.masizpamoja.views.activities.OurActivities;
 
@@ -30,12 +34,21 @@ import butterknife.ButterKnife;
 
 public class Home extends Fragment {
 
-    MainAdapter mainAdapter;
+    private static RecyclerView.LayoutManager layoutManager;
+
+    private RandomBlogAdapter randomBlogAdapter;
+
+    @BindView(R.id.random_blogs_recyclerView)
+    RecyclerView random_blogs_rcyclerview;
+
+    private List<RandomBlogs> randomBlogsList= new ArrayList<>();
+
+    private MainAdapter mainAdapter;
+
 
     @BindView(R.id.main_actions_recyclerView)
     RecyclerView main_action_recyclerview;
 
-    static RecyclerView.LayoutManager layoutManager;
 
     private List<MainAction> actionList = new ArrayList<>();
 
@@ -47,24 +60,21 @@ public class Home extends Fragment {
     MaterialCardView whatDoWeDo;
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
 
-        MainAction blog = new MainAction("Blogs");
-        actionList.add(blog);
+        if (getActivity() != null) {
+            getActivity().setTitle("Home");
+        }
 
-        MainAction blog1 = new MainAction("Upcoming Events");
-        actionList.add(blog1);
+        randomBlogsList = RandomBlogsData.getRandomBlogs();
+        initViewRandomBlogs(randomBlogsList);
 
-        MainAction blog2 = new MainAction("Need Help");
-        actionList.add(blog2);
-
-        MainAction blog3= new MainAction("Chat Room");
-        actionList.add(blog3);
-
-        initView(actionList);
+        actionList= MainActionData.getMainAction();
+        initViewMainActions(actionList);
 
 
         whoWeAre.setOnClickListener(v->{
@@ -81,7 +91,15 @@ public class Home extends Fragment {
         return view;
     }
 
-    private void initView(List<MainAction> actionList) {
+    private void initViewRandomBlogs(List<RandomBlogs> randomBlogsList) {
+        randomBlogAdapter = new RandomBlogAdapter(randomBlogsList, getActivity());
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        random_blogs_rcyclerview.setLayoutManager(layoutManager);
+        random_blogs_rcyclerview.setAdapter(randomBlogAdapter);
+        random_blogs_rcyclerview.setNestedScrollingEnabled(false);
+    }
+
+    private void initViewMainActions(List<MainAction> actionList) {
         mainAdapter = new MainAdapter(actionList, getActivity());
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         main_action_recyclerview.setLayoutManager(layoutManager);

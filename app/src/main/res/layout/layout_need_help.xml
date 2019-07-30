@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:elevation="5dp"
+    android:layout_marginBottom="@dimen/medium_margin"
+    android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/name"
+            android:padding="@dimen/activity_large_margin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/name"
+            android:textSize="@dimen/field_text_size"
+            android:layout_marginStart="@dimen/activity_margin"/>
+
+
+</androidx.cardview.widget.CardView>

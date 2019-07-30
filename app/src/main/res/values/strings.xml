@@ -27,4 +27,7 @@
     <string name="more_info">More Information</string>
     <string name="who_are_we">Who are we...?</string>
     <string name="what_do_we_do">What do we do....?</string>
+    <string name="chat">Chat</string>
+    <string name="title">Title</string>
+    <string name="name">Name</string>
 </resources>

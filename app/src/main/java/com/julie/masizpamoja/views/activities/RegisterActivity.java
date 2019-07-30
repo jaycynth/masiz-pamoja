@@ -22,6 +22,8 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Create Accounts");
 
         signIn.setOnClickListener(v->{
             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
