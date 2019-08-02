@@ -30,4 +30,10 @@
     <string name="chat">Chat</string>
     <string name="title">Title</string>
     <string name="name">Name</string>
+    <string name="occupation">What do you do</string>
+    <string name="issue_title">Title of  Issue</string>
+    <string name="getPhoto">Add Photo</string>
+    <string name="Done">done</string>
+    <string name="message">Message : </string>
+    <string name="submit">Submit</string>
 </resources>

@@ -22,6 +22,15 @@ public class NeedHelpData {
         NeedHelp blog3 = new NeedHelp("Rape");
         needHelpList.add(blog3);
 
+        NeedHelp blog4 = new NeedHelp("Abortion");
+        needHelpList.add(blog4);
+
+        NeedHelp blog5 = new NeedHelp("Gynocare");
+        needHelpList.add(blog5);
+
+        NeedHelp blog6 = new NeedHelp("Teenage Pregnancies");
+        needHelpList.add(blog6);
+
 
 
 

@@ -17,7 +17,6 @@ import com.julie.masizpamoja.views.activities.LoginActivity;
 import com.julie.masizpamoja.views.fragments.Home;
 import com.julie.masizpamoja.views.fragments.Profile;
 import com.julie.masizpamoja.views.fragments.Settings;
-import com.julie.masizpamoja.views.fragments.Share;
 import com.julie.masizpamoja.views.fragments.Support;
 
 import butterknife.BindView;
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Home home;
     Profile profile;
     Settings settings;
-    Share share;
     Support support;
 
     Fragment fragment = null;
@@ -64,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         home = new Home();
         profile = new Profile();
         settings = new Settings();
-        share = new Share();
         support = new Support();
 
         //load home fragment
@@ -104,9 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 setTitle(menuItem.getTitle());
                 break;
             case R.id.action_share:
-                fragment = share;
-                setTitle(menuItem.getTitle());
-                break;
+                shareLink();
             case R.id.action_support:
                 fragment = support;
                 setTitle(menuItem.getTitle());
@@ -123,6 +118,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawer.closeDrawers();
         return true;
 
+    }
+
+    private void shareLink() {
+        try {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "My application name");
+            String shareMessage= "\nLet me recommend you this application\n\n";
+            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+            startActivity(Intent.createChooser(shareIntent, "choose one"));
+        } catch(Exception e) {
+            //e.toString();
+        }
     }
 
     private void logOut() {
