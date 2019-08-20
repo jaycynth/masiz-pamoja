@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+
         accessToken = SharedPreferencesManager.getInstance(this).getToken();
 
 
@@ -162,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 setTitle(menuItem.getTitle());
                 break;
             case R.id.action_logout:
-                mainViewModel.userLogout(accessToken);
+                mainViewModel.userLogout("Bearer " + accessToken);
                 break;
             default:
                 break;

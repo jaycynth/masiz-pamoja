@@ -3,26 +3,28 @@ package com.julie.masizpamoja.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User {
-
+public class Blog {
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("name")
+    @SerializedName("title")
     @Expose
-    private String name;
-    @SerializedName("email")
+    private String title;
+    @SerializedName("body")
     @Expose
-    private String email;
-    @SerializedName("email_verified_at")
+    private String body;
+    @SerializedName("image")
     @Expose
-    private String emailVerifiedAt;
+    private String image;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("user")
+    @Expose
+    private User user;
 
     public Integer getId() {
         return id;
@@ -32,28 +34,28 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getEmail() {
-        return email;
+    public String getBody() {
+        return body;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setBody(String body) {
+        this.body = body;
     }
 
-    public String getEmailVerifiedAt() {
-        return emailVerifiedAt;
+    public String getImage() {
+        return image;
     }
 
-    public void setEmailVerifiedAt(String emailVerifiedAt) {
-        this.emailVerifiedAt = emailVerifiedAt;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getCreatedAt() {
@@ -70,6 +72,14 @@ public class User {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

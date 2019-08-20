@@ -7,7 +7,9 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
+import com.julie.masizpamoja.datastates.LatestBlogsState;
 import com.julie.masizpamoja.datastates.LogoutState;
+import com.julie.masizpamoja.repos.LatestBlogsRepo;
 import com.julie.masizpamoja.repos.LogoutRepo;
 
 public class MainViewModel extends AndroidViewModel {
@@ -18,28 +20,31 @@ public class MainViewModel extends AndroidViewModel {
 
     public MainViewModel(@NonNull Application application) {
         super(application);
+
         logoutStateMediatorLiveData = new MediatorLiveData<>();
         logoutRepo = new LogoutRepo(application);
-        
+
+
     }
 
 
-
-    public LiveData<LogoutState> getLogoutResponse(){
+    /*logout */
+    public LiveData<LogoutState> getLogoutResponse() {
         return logoutStateMediatorLiveData;
     }
 
-    public void userLogout(String accessToken){
+    public void userLogout(String accessToken) {
 
         LiveData<LogoutState> logoutStateLiveData = logoutRepo.logout(accessToken);
         logoutStateMediatorLiveData.addSource(logoutStateLiveData,
                 logoutStateMediatorLiveData -> {
-                    if (this.logoutStateMediatorLiveData.hasActiveObservers()){
+                    if (this.logoutStateMediatorLiveData.hasActiveObservers()) {
                         this.logoutStateMediatorLiveData.removeSource(logoutStateLiveData);
                     }
                     this.logoutStateMediatorLiveData.setValue(logoutStateMediatorLiveData);
                 });
 
     }
-   
+
+
 }

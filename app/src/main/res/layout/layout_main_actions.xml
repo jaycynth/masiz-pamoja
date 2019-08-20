@@ -11,8 +11,11 @@
 
         <ImageView
             android:id="@+id/action_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_power_settings_new_black_24dp"
+            android:scaleType="centerInside"
+            />
 
         <TextView
             android:id="@+id/action_name"

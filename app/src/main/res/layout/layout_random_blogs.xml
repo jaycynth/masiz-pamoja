@@ -1,42 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
     android:layout_margin="@dimen/medium_margin"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="200dp">
-        <RelativeLayout
-            android:layout_margin="@dimen/activity_margin"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/cover_page"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:alpha="0.4"
+            android:scaleType="centerCrop" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/activity_margin">
+
 
             <TextView
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/full_name"/>
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:text="@string/full_name" />
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/username"
-                android:textSize="@dimen/field_text_size"
-                android:textStyle="bold"
-                android:text="@string/title"/>
-
-
+                android:text="@string/title"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:layout_marginBottom="@dimen/activity_small_margin"
-                android:layout_alignParentBottom="true">
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/activity_small_margin">
 
                 <TextView
                     android:id="@+id/chat"
@@ -50,25 +60,24 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/colorBlack"
                     android:layout_marginStart="@dimen/medium_margin"
-                    android:layout_marginEnd="@dimen/medium_margin"/>
+                    android:layout_marginEnd="@dimen/medium_margin"
+                    android:background="@color/colorBlack" />
 
                 <TextView
+                    android:id="@+id/share"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/activity_large_margin"
                     android:layout_weight="1"
                     android:drawableStart="@drawable/ic_share_black_24dp"
                     android:drawablePadding="@dimen/activity_small_margin"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/activity_large_margin"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/share"
-                    android:text="@string/share"/>
+                    android:text="@string/share" />
 
             </LinearLayout>
 
         </RelativeLayout>
-
 
 
     </androidx.cardview.widget.CardView>

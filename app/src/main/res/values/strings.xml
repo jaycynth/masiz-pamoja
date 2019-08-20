@@ -41,4 +41,6 @@
     <string name="enter_password_error">Enter a password</string>
     <string name="invalid_email_address_error">Enter a valid email</string>
     <string name="error_occurred">Something went wrong</string>
+    <string name="explore">Explore</string>
+    <string name="recent_blogs">Recent Blogs</string>
 </resources>

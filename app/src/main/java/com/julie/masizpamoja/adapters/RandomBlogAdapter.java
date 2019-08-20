@@ -1,16 +1,21 @@
 package com.julie.masizpamoja.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.julie.masizpamoja.R;
+import com.julie.masizpamoja.models.Blog;
 import com.julie.masizpamoja.models.RandomBlogs;
+import com.julie.masizpamoja.views.activities.BlogDetails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +25,10 @@ import butterknife.ButterKnife;
 
 public class RandomBlogAdapter extends RecyclerView.Adapter<RandomBlogAdapter.RandomBlogViewHolder> {
 
-    private List<RandomBlogs> randomBlogs = new ArrayList<>();
+    private List<Blog> randomBlogs = new ArrayList<>();
     private Context context;
 
-    public RandomBlogAdapter(List<RandomBlogs> randomBlogs, Context context) {
+    public RandomBlogAdapter(List<Blog> randomBlogs, Context context) {
         this.randomBlogs = randomBlogs;
         this.context = context;
     }
@@ -39,9 +44,11 @@ public class RandomBlogAdapter extends RecyclerView.Adapter<RandomBlogAdapter.Ra
     @Override
     public void onBindViewHolder(@NonNull RandomBlogAdapter.RandomBlogViewHolder holder, int position) {
 
-        RandomBlogs randomBlog = randomBlogs.get(position);
+        Blog randomBlog = randomBlogs.get(position);
         holder.title.setText(randomBlog.getTitle());
-        holder.userName.setText(randomBlog.getUsername());
+        holder.userName.setText(randomBlog.getUser().getName());
+        Glide.with(context).load(randomBlog.getImage()).into(holder.coverPage);
+
 
     }
 
@@ -58,10 +65,27 @@ public class RandomBlogAdapter extends RecyclerView.Adapter<RandomBlogAdapter.Ra
         @BindView(R.id.title)
         TextView title;
 
+        @BindView(R.id.cover_page)
+        ImageView coverPage;
+
 
         public RandomBlogViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(v->{
+                goToView(getLayoutPosition());
+
+
+            });
         }
+    }
+
+    private void goToView(int adapterPosition) {
+        Blog blogs = randomBlogs.get(adapterPosition);
+
+        Intent restaurantDetailIntent = new Intent(context, BlogDetails.class);
+
+        context.startActivity(restaurantDetailIntent);
     }
 }

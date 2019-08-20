@@ -31,7 +31,6 @@ public interface ApiService {
                               @Field("name") String name);
 
     @Headers({"Accept: application/json"})
-    @FormUrlEncoded
     @POST("logout")
     Call<Logout> logout(
             @Header("Authorization") String accessToken

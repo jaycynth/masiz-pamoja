@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.julie.masizpamoja.R;
 import com.julie.masizpamoja.models.MainAction;
 import com.julie.masizpamoja.views.activities.Blogs;
@@ -46,6 +47,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         MainAction mainAction = actionList.get(position);
         holder.actionName.setText(mainAction.getName());
 
+        Glide.with(context).load(mainAction.getImage()).into(holder.actionImage);
+
 
     }
 
@@ -77,13 +80,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
     private void goToView(int adapterPosition) {
 
         MainAction mainAction = actionList.get(adapterPosition);
-        if (mainAction.getName().equalsIgnoreCase("Blogs")) {
+        if (mainAction.getName().equalsIgnoreCase("Blog")) {
             Intent restaurantDetailIntent = new Intent(context, Blogs.class);
             context.startActivity(restaurantDetailIntent);
-        }else if(mainAction.getName().equalsIgnoreCase("Upcoming Events")){
+        } else if (mainAction.getName().equalsIgnoreCase("Upcoming Events")) {
             Intent restaurantDetailIntent = new Intent(context, UpcomingEvents.class);
             context.startActivity(restaurantDetailIntent);
-        }else if(mainAction.getName().equalsIgnoreCase("Need Help")){
+        } else if (mainAction.getName().equalsIgnoreCase("Need Help")) {
             Intent restaurantDetailIntent = new Intent(context, NeedHelp.class);
             context.startActivity(restaurantDetailIntent);
         }

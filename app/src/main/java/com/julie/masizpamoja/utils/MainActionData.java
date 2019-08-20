@@ -1,5 +1,6 @@
 package com.julie.masizpamoja.utils;
 
+import com.julie.masizpamoja.R;
 import com.julie.masizpamoja.models.MainAction;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class MainActionData {
     public static List<MainAction> getMainAction(){
         List<MainAction> actionList = new ArrayList<>();
 
-        MainAction blog = new MainAction("Blogs");
+        MainAction blog = new MainAction(R.drawable.ic_blog_comment_speech_bubble_symbol,"Blog");
         actionList.add(blog);
 
         MainAction blog1 = new MainAction("Upcoming Events");
