@@ -3,6 +3,7 @@ package com.julie.masizpamoja.api;
 import com.julie.masizpamoja.models.AllBlogs;
 import com.julie.masizpamoja.models.LatestBlogs;
 import com.julie.masizpamoja.models.Login;
+import com.julie.masizpamoja.models.Logout;
 import com.julie.masizpamoja.models.Register;
 
 import retrofit2.Call;
@@ -29,11 +30,19 @@ public interface ApiService {
                               @Field("password") String password,
                               @Field("name") String name);
 
+    @Headers({"Accept: application/json"})
+    @FormUrlEncoded
+    @POST("logout")
+    Call<Logout> logout(
+            @Header("Authorization") String accessToken
+                            );
+
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @GET("blogs")
     Call<AllBlogs> getAllBlogs(
             @Header("Authorization") String accessToken
     );
+
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @GET("latestblogs")
     Call<LatestBlogs> getLatestBlogs(

@@ -5,10 +5,14 @@ import android.content.Intent;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.julie.masizpamoja.BuildConfig;
+import com.julie.masizpamoja.datastates.LoginState;
+import com.julie.masizpamoja.models.LoginError;
 import com.julie.masizpamoja.views.activities.LoginActivity;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -38,6 +42,7 @@ public class ApiClient {
 
             //re-direct user to login
             if (response.code() == 401 || response.code() == 500) {
+
                 Intent logoutIntent = new Intent(context, LoginActivity.class);
                 logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(logoutIntent);

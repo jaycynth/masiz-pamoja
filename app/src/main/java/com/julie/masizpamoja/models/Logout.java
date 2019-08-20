@@ -3,13 +3,13 @@ package com.julie.masizpamoja.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Login {
+public class Logout {
     @SerializedName("status")
     @Expose
     private Boolean status;
-    @SerializedName("access_token")
+    @SerializedName("message")
     @Expose
-    private String accessToken;
+    private String message;
 
     public Boolean getStatus() {
         return status;
@@ -19,11 +19,12 @@ public class Login {
         this.status = status;
     }
 
-    public String getAccessToken() {
-        return accessToken;
+    public String getMessage() {
+        return message;
     }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public void setMessage(String message) {
+        this.message = message;
     }
+
 }

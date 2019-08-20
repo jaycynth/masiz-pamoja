@@ -36,4 +36,9 @@
     <string name="Done">done</string>
     <string name="message">Message : </string>
     <string name="submit">Submit</string>
+    <string name="enter_name_error">Enter a name</string>
+    <string name="enter_email_error">Enter an email</string>
+    <string name="enter_password_error">Enter a password</string>
+    <string name="invalid_email_address_error">Enter a valid email</string>
+    <string name="error_occurred">Something went wrong</string>
 </resources>

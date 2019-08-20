@@ -20,10 +20,24 @@ public class SharedPreferencesManager {
         return mInstance;
     }
 
+    //check whether a user is logged in
+    public boolean isLoggedIn() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString("token", null) != null;
+    }
+
+
     public void saveUserImage(String filePath) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(Constants.PROFILE_IMAGE, filePath);
+        editor.apply();
+
+    }
+    public void saveToken(String token) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Constants.TOKEN, token);
         editor.apply();
 
     }
@@ -52,6 +66,11 @@ public class SharedPreferencesManager {
     public String getUserImage() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(Constants.PROFILE_IMAGE, null);
+
+    }
+    public String getToken() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(Constants.TOKEN, null);
 
     }
     public String getNames() {
