@@ -98,18 +98,18 @@ public class RegisterActivity extends AppCompatActivity {
             String password = passwordEdit.getText().toString().trim();
 
             registerUser(email, password, fullNames);
-             hideKeyboard();
+            hideKeyboard();
 
         });
     }
 
-    private void hideKeyboard(){
-        try{
-            InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+    private void hideKeyboard() {
+        try {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             if (inputMethodManager != null) {
-                inputMethodManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(),0);
+                inputMethodManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -120,7 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
         boolean status = allNewUsers.getStatus();
         if (status) {
 
-           // SharedPreferencesManager.getInstance(this).saveToken(allNewUsers.getToken());
+            SharedPreferencesManager.getInstance(this).saveToken(allNewUsers.getAccessToken());
             SharedPreferencesManager.getInstance(this).saveNames(allNewUsers.getUser().getName());
             SharedPreferencesManager.getInstance(this).saveEmail(allNewUsers.getUser().getEmail());
 

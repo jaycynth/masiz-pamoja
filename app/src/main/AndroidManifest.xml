@@ -20,7 +20,10 @@
         <activity android:name=".views.activities.AboutUs" />
         <activity android:name=".views.activities.ForgotPassword" />
         <activity android:name=".views.activities.NeedHelp" />
-        <activity android:name=".views.activities.BlogDetails" />
+        <activity android:name=".views.activities.BlogDetails"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
         <activity android:name=".views.activities.Blogs" />
         <activity android:name=".views.activities.EventDetails" />
         <activity android:name=".views.activities.UpcomingEvents" />

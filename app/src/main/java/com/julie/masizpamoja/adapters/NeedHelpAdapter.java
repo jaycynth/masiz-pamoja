@@ -56,6 +56,15 @@ public class NeedHelpAdapter extends RecyclerView.Adapter<NeedHelpAdapter.NeedHe
         public NeedHelpVieHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+
+            itemView.setOnClickListener(v->{
+                goToView(getAdapterPosition());
+            });
         }
+    }
+
+    private void goToView(int adapterPosition) {
+
+
     }
 }

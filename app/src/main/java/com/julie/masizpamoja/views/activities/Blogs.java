@@ -2,12 +2,14 @@ package com.julie.masizpamoja.views.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.julie.masizpamoja.R;
+import com.julie.masizpamoja.adapters.AllBlogsAdapter;
 import com.julie.masizpamoja.models.AllBlogs;
 import com.julie.masizpamoja.models.Blog;
 import com.julie.masizpamoja.utils.SharedPreferencesManager;
@@ -20,9 +22,12 @@ import butterknife.ButterKnife;
 
 public class Blogs extends AppCompatActivity {
 
+    private static RecyclerView.LayoutManager layoutManager;
 
     @BindView(R.id.allBlogsRv)
     RecyclerView allBlogsRv;
+    
+    AllBlogsAdapter allBlogsAdapter;
 
     BlogsViewModel blogsViewModel;
     String accessToken;
@@ -77,8 +82,19 @@ public class Blogs extends AppCompatActivity {
         boolean status= allAllBlogs.getStatus();
         if(status){
             allBlogsList = allAllBlogs.getBlogs();
+            if(!allBlogsList.isEmpty()){
+                initView(allBlogsList);
+            }
         }
 
+    }
+
+    private void initView(List<Blog> allBlogsList) {
+        allBlogsAdapter = new AllBlogsAdapter(allBlogsList, this);
+        allBlogsRv.setAdapter(allBlogsAdapter);
+        layoutManager = new LinearLayoutManager(this);
+        allBlogsRv.setLayoutManager(layoutManager);
+        allBlogsRv.setNestedScrollingEnabled(false);
     }
 
 

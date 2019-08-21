@@ -18,6 +18,7 @@ public class BlogsViewModel extends AndroidViewModel {
 
     public BlogsViewModel(@NonNull Application application) {
         super(application);
+        allBlogsStateMediatorLiveData = new MediatorLiveData<>();
         allBlogsRepo = new AllBlogsRepo(application);
 
     }

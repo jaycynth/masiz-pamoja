@@ -13,7 +13,7 @@ public class MainActionData {
         MainAction blog = new MainAction(R.drawable.ic_blog_comment_speech_bubble_symbol,"Blog");
         actionList.add(blog);
 
-        MainAction blog1 = new MainAction("Upcoming Events");
+        MainAction blog1 = new MainAction(R.drawable.ic_calendar,"Upcoming Events");
         actionList.add(blog1);
 
         MainAction blog2 = new MainAction("Need Help");

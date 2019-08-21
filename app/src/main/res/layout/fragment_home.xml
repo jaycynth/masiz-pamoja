@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
+        android:background="@color/colorWhite"
         android:layout_margin="@dimen/medium_margin"
         android:layout_height="wrap_content">
         <TextView
@@ -17,6 +18,7 @@
             android:layout_margin="@dimen/activity_margin"
             android:text="@string/recent_blogs"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="16sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -32,6 +34,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/activity_margin"
     android:text="@string/explore"
+    android:textColor="@color/black"
     android:textStyle="bold"
     android:textSize="16sp"/>
 
@@ -47,6 +50,7 @@
         android:layout_height="wrap_content"
         android:text="@string/more_info"
         android:textSize="@dimen/field_text_size"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_margin="@dimen/activity_margin"
         />

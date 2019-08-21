@@ -85,6 +85,10 @@ public class RandomBlogAdapter extends RecyclerView.Adapter<RandomBlogAdapter.Ra
         Blog blogs = randomBlogs.get(adapterPosition);
 
         Intent restaurantDetailIntent = new Intent(context, BlogDetails.class);
+        restaurantDetailIntent.putExtra("blogsTitle",blogs.getTitle());
+        restaurantDetailIntent.putExtra("blogsBody", blogs.getBody());
+        restaurantDetailIntent.putExtra("blogsImage",blogs.getImage());
+        restaurantDetailIntent.putExtra("blogsWriterName",blogs.getUser().getName());
 
         context.startActivity(restaurantDetailIntent);
     }
