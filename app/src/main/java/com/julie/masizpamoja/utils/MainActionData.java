@@ -16,7 +16,7 @@ public class MainActionData {
         MainAction blog1 = new MainAction(R.drawable.ic_calendar,"Upcoming Events");
         actionList.add(blog1);
 
-        MainAction blog2 = new MainAction("Need Help");
+        MainAction blog2 = new MainAction(R.drawable.ic_help,"Need Help");
         actionList.add(blog2);
 
         MainAction blog3= new MainAction("Chat Room");

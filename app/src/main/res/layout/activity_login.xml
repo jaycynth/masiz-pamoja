@@ -44,11 +44,13 @@
                     android:layout_width="match_parent"
                     android:id="@+id/emailLayout"
                     android:layout_height="wrap_content"
+
                     android:layout_margin="@dimen/medium_margin">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:id="@+id/emailEdit"
+                        android:theme="@style/TextInputLayoutAppearance"
                         android:layout_height="wrap_content"
                         android:hint="@string/email"
                         android:textColorHint="@color/colorLightGray"
@@ -69,6 +71,7 @@
                         android:id="@+id/passwordEdit"
                         android:layout_height="wrap_content"
                         android:hint="@string/password"
+                        android:theme="@style/TextInputLayoutAppearance"
                         android:textColorHint="@color/colorLightGray"
                         android:inputType="textPassword"/>
                 </com.google.android.material.textfield.TextInputLayout>

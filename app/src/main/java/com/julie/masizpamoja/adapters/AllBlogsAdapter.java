@@ -22,6 +22,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.julie.masizpamoja.api.ApiEndpoints.BLOG_URL;
+
 public class AllBlogsAdapter extends RecyclerView.Adapter<AllBlogsAdapter.AllBlogsViewHolder> {
 
     private List<Blog> allBlogs;
@@ -45,7 +47,7 @@ public class AllBlogsAdapter extends RecyclerView.Adapter<AllBlogsAdapter.AllBlo
 
         Blog blog = allBlogs.get(position);
         holder.blogTitle.setText(blog.getTitle());
-        Glide.with(context).load(blog.getImage()).into(holder.blogImage);
+        Glide.with(context).load(BLOG_URL +blog.getImage()).into(holder.blogImage);
 
 
     }

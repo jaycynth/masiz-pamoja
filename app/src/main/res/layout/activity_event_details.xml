@@ -1,9 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/scrollView"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".views.activities.EventDetails">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:background="@color/colorWhite"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle"
+                app:collapsedTitleTextAppearance="@android:color/transparent"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:toolbarId="@+id/toolbar">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/cover_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:scaleType="centerCrop" />
+
+                            <TextView
+                                android:id="@+id/event_title"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="-16dp"
+                                android:layout_below="@id/cover_image"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:text="@string/title_event"
+                                android:layout_marginStart="@dimen/activity_margin"
+                                android:layout_marginBottom="@dimen/medium_margin"
+                                android:layout_gravity="start"/>
+
+                            <TextView
+                                android:id="@+id/event_date"
+                                android:layout_below="@id/event_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:text="@string/_12_09_2019"
+                                android:layout_marginStart="@dimen/activity_margin"
+                                android:layout_marginTop="@dimen/medium_margin"
+                                android:textColor="@color/colorPrimary"
+                                android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/event_tickets"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/activity_margin"
+                            android:layout_alignParentEnd="true"
+                            android:textSize="18sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="@string/no_tickets_for_this_event"
+                            android:layout_below="@id/event_date"/>
+
+                        </RelativeLayout>
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <include layout="@layout/details_of_events"/>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</ScrollView>

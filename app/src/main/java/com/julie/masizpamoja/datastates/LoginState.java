@@ -11,6 +11,7 @@ public class LoginState
     private Throwable errorThrowable;
     private LoginError loginError;
 
+
     public LoginState(Login allLogins) {
         this.allLogins = allLogins;
         this.message =null;
@@ -30,6 +31,7 @@ public class LoginState
         this.allLogins = null;
         this.message = null;
         this.loginError = null;
+
     }
 
     public LoginState(LoginError loginError) {
@@ -37,7 +39,9 @@ public class LoginState
         this.errorThrowable = null;
         this.allLogins = null;
         this.message = null;
+
     }
+
 
     public Login getAllLogins() {
         return allLogins;

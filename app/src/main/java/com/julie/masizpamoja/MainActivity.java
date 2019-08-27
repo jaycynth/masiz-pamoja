@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle mToggle;
 
     @BindView(R.id.nav_view)
-    NavigationView nav_View;
+    NavigationView navView;
 
     FragmentManager fragmentManager;
 
@@ -56,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     String accessToken;
 
+    TextView navEmail;
+    TextView navName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +68,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
+            Intent homeIntent = new Intent(this, LoginActivity.class);
+            startActivity(homeIntent);
+        }
 
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
@@ -84,12 +93,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-        if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
-            Intent homeIntent = new Intent(this, LoginActivity.class);
-            startActivity(homeIntent);
-        }
 
-        nav_View.setNavigationItemSelectedListener(this);
+        navView.setNavigationItemSelectedListener(this);
 
         fragmentManager = getSupportFragmentManager();
 
@@ -107,6 +112,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mToggle = new ActionBarDrawerToggle(this, mDrawer, R.string.open, R.string.close);
         mDrawer.addDrawerListener(mToggle);
         mToggle.syncState();
+
+
+
+//        //creating objects for the views in the navigation header
+//        View hView = navView.getHeaderView(0);
+//        navName = hView.findViewById(R.id.navName);
+//        navEmail = hView.findViewById(R.id.navEmail);
 
 
     }
@@ -152,12 +164,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragment = profile;
                 setTitle(menuItem.getTitle());
                 break;
-            case R.id.action_settings:
-                fragment = settings;
-                setTitle(menuItem.getTitle());
-                break;
-            case R.id.action_share:
-                shareLink();
+
             case R.id.action_support:
                 fragment = support;
                 setTitle(menuItem.getTitle());
@@ -176,21 +183,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void shareLink() {
-        try {
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "My application name");
-            String shareMessage = "\nLet me recommend you this application\n\n";
-            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
-            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
-            startActivity(Intent.createChooser(shareIntent, "choose one"));
-        } catch (Exception e) {
-            //e.toString();
+    @Override
+    protected void onStart() {
+        if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
+            Intent homeIntent = new Intent(this, LoginActivity.class);
+            homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(homeIntent);
+            finish();
         }
+
+        super.onStart();
     }
 
+
+
+
     private void logOut() {
+        SharedPreferencesManager.getInstance(this).clear();
+
         Intent i = new Intent(MainActivity.this, LoginActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);

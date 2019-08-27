@@ -16,13 +16,16 @@ public class User {
     private String email;
     @SerializedName("email_verified_at")
     @Expose
-    private String emailVerifiedAt;
+    private Object emailVerifiedAt;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("profile")
+    @Expose
+    private String profile;
 
     public Integer getId() {
         return id;
@@ -48,11 +51,11 @@ public class User {
         this.email = email;
     }
 
-    public String getEmailVerifiedAt() {
+    public Object getEmailVerifiedAt() {
         return emailVerifiedAt;
     }
 
-    public void setEmailVerifiedAt(String emailVerifiedAt) {
+    public void setEmailVerifiedAt(Object emailVerifiedAt) {
         this.emailVerifiedAt = emailVerifiedAt;
     }
 
@@ -71,5 +74,14 @@ public class User {
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
 
 }

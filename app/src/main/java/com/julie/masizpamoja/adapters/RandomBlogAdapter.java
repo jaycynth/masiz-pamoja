@@ -23,6 +23,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.julie.masizpamoja.api.ApiEndpoints.BLOG_URL;
+
+
 public class RandomBlogAdapter extends RecyclerView.Adapter<RandomBlogAdapter.RandomBlogViewHolder> {
 
     private List<Blog> randomBlogs = new ArrayList<>();
@@ -47,7 +50,7 @@ public class RandomBlogAdapter extends RecyclerView.Adapter<RandomBlogAdapter.Ra
         Blog randomBlog = randomBlogs.get(position);
         holder.title.setText(randomBlog.getTitle());
         holder.userName.setText(randomBlog.getUser().getName());
-        Glide.with(context).load(randomBlog.getImage()).into(holder.coverPage);
+        Glide.with(context).load(BLOG_URL +randomBlog.getImage()).into(holder.coverPage);
 
 
     }

@@ -16,22 +16,11 @@
             android:title="@string/profile"
             android:icon="@drawable/ic_person_black_24dp"
             app:showAsAction="never" />
-        <item
-            android:id="@+id/action_settings"
-            android:enabled="true"
-            android:icon="@drawable/ic_settings_black_24dp"
-            android:title="@string/settings"
-            app:showAsAction="never" />
 
-    </group>
-    <item android:title="General">
-        <menu>
-            <item
-                android:id="@+id/action_share"
-                android:enabled="true"
-                android:title="@string/share"
-                android:icon="@drawable/ic_share_black_24dp"
-                app:showAsAction="never" />
+
+
+
+
             <item
                 android:id="@+id/action_support"
                 android:title="@string/support"
@@ -46,7 +35,6 @@
                 android:enabled="true"
                 app:showAsAction="never"/>
 
-        </menu>
-    </item>
+    </group>
 
 </menu>

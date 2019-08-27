@@ -1,65 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:fillViewport="true"
+    android:orientation="vertical"
     tools:context=".views.activities.BlogDetails">
 
-    <LinearLayout
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="@dimen/app_bar_height"
+        android:background="@color/colorWhite"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-
-    <ImageView
-        android:id="@+id/cover_image"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:scaleType="centerCrop" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="-16dp"
-
-        app:cardCornerRadius="5dp"
-        android:layout_marginEnd="@dimen/medium_margin"
-        android:layout_marginStart="@dimen/medium_margin">
-        <LinearLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/blog_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"/>
-
-        <TextView
-            android:id="@+id/writers_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            android:layout_gravity="end"
-            android:layout_margin="@dimen/medium_margin"
-            />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+            android:fitsSystemWindows="true"
+            app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle"
+            app:collapsedTitleTextAppearance="@android:color/transparent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/toolbar">
 
 
-<TextView
-    android:id="@+id/blog_body"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textSize="18sp"
-    android:layout_margin="@dimen/activity_margin"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    </LinearLayout>
 
-</ScrollView>
+                <ImageView
+                    android:id="@+id/cover_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scaleType="centerCrop" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/activity_margin"
+                    android:layout_marginTop="-16dp"
+                    android:layout_marginBottom="@dimen/medium_margin"
+                    android:layout_marginEnd="@dimen/activity_margin"
+                    app:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/blog_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_margin="@dimen/medium_margin"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/writers_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_margin="@dimen/medium_margin"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_blog_details" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

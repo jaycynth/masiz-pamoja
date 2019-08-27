@@ -1,6 +1,7 @@
 package com.julie.masizpamoja.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.julie.masizpamoja.R;
+import com.julie.masizpamoja.models.HelpDesk;
 import com.julie.masizpamoja.models.NeedHelp;
+import com.julie.masizpamoja.views.activities.HelpDeskDetails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +23,11 @@ import butterknife.ButterKnife;
 
 public class NeedHelpAdapter extends RecyclerView.Adapter<NeedHelpAdapter.NeedHelpVieHolder> {
 
-    private List<NeedHelp> needHelpList;
+    private List<HelpDesk> needHelpList;
     private Context context;
 
 
-    public NeedHelpAdapter(List<NeedHelp> needHelpList, Context context) {
+    public NeedHelpAdapter(List<HelpDesk> needHelpList, Context context) {
         this.needHelpList = needHelpList;
         this.context = context;
     }
@@ -38,8 +41,8 @@ public class NeedHelpAdapter extends RecyclerView.Adapter<NeedHelpAdapter.NeedHe
 
     @Override
     public void onBindViewHolder(@NonNull NeedHelpAdapter.NeedHelpVieHolder holder, int position) {
-        NeedHelp needHelp = needHelpList.get(position);
-        holder.name.setText(needHelp.getName());
+        HelpDesk needHelp = needHelpList.get(position);
+        holder.name.setText(needHelp.getTitle());
 
     }
 
@@ -64,6 +67,13 @@ public class NeedHelpAdapter extends RecyclerView.Adapter<NeedHelpAdapter.NeedHe
     }
 
     private void goToView(int adapterPosition) {
+
+
+        HelpDesk helpDesk = needHelpList.get(adapterPosition);
+        Intent needHelp = new Intent(context, HelpDeskDetails.class);
+        needHelp.putExtra("helpDeskTitle", helpDesk.getTitle());
+        needHelp.putExtra("helpDeskDetails", helpDesk.getInfo());
+        context.startActivity(needHelp);
 
 
     }

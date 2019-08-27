@@ -1,9 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".views.activities.AboutUs">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/activity_margin"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/who_are_we"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/who_are_we_description"
+            android:textSize="18sp" />
+
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/be_part_of_us_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:background="@drawable/circular_border_shape"
+            android:text="@string/be_part_of_us"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:initialCornerAngle="27dp"
+            app:spinning_bar_color="#FFF"
+            app:spinning_bar_padding="6dp"
+            app:spinning_bar_width="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:text="@string/our_core_values"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/core_values"
+            android:textSize="18sp" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:text="@string/mission"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mission_values"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:text="@string/vision"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/vision_values"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</ScrollView>

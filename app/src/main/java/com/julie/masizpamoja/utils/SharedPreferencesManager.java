@@ -20,11 +20,7 @@ public class SharedPreferencesManager {
         return mInstance;
     }
 
-    //check whether a user is logged in
-    public boolean isLoggedIn() {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString("token", null) != null;
-    }
+
 
 
     public void saveUserImage(String filePath) {
@@ -86,6 +82,24 @@ public class SharedPreferencesManager {
     public String getEmail() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(Constants.EMAIL, null);
+
+
+
+    }
+
+    //check whether a user is logged in
+    public boolean isLoggedIn() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString("token", null) != null;
+    }
+
+    //for logout
+    public void clear() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+
 
     }
 

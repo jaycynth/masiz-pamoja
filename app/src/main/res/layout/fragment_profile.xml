@@ -1,130 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLightGray"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
     tools:context=".views.fragments.Profile">
 
 
-    <ImageView
-        android:id="@+id/profile_image"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:backgroundTint="@color/colorAccent"
+        android:background="@drawable/profile_bg">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_person_black_24dp"
         android:scaleType="centerCrop" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/activity_margin"
-        android:layout_marginEnd="@dimen/activity_margin"
-        android:elevation="@dimen/activity_margin">
 
-        <ScrollView
+        <ImageButton
+            android:id="@+id/edit_profile_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/profile_image"
+            android:layout_alignBottom="@+id/profile_image"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="-6dp"
+            android:background="@drawable/image_btn_bg"
+            android:contentDescription="@string/take_photo"
+            android:padding="@dimen/medium_margin"
+            android:src="@drawable/ic_add_a_photo_black_24dp">
+
+        </ImageButton>
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
+            android:layout_below="@id/edit_profile_picture"
             android:scrollbarAlwaysDrawHorizontalTrack="true"
             android:scrollbars="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_margin"
             android:orientation="vertical">
 
-            <RelativeLayout
+
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="@dimen/medium_margin"
-                    android:text="@string/profile"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/logo_text_size"
-                    android:textStyle="bold" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:id="@+id/hidden_full_names"
+                    android:hint="@string/name"
+                    android:theme="@style/TextInputLayoutAppearance"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:layout_height="match_parent">
 
-                <ImageButton
-                    android:id="@+id/edit_profle_buttton"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/medium_margin"
-                    android:layout_margin="@dimen/activity_small_margin"
-                    android:background="@drawable/ic_edit_black_24dp" />
-            </RelativeLayout>
+                </com.google.android.material.textfield.TextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:id="@+id/hidden_email"
+                    android:theme="@style/TextInputLayoutAppearance"
+                    android:clickable="false"
+                     android:focusable="false"
+                    android:hint="@string/email"
+                    android:layout_height="match_parent">
+
+                </com.google.android.material.textfield.TextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
             <TextView
-                android:id="@+id/full_names"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_margin"
-                android:layout_marginTop="@dimen/activity_margin"
-                android:layout_marginEnd="@dimen/activity_margin"
-                android:hint="@string/full_name" />
-
-            <EditText
-                android:id="@+id/hidden_full_names"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/full_name"
-                android:visibility="gone" />
-
-
-            <TextView
-                android:id="@+id/occupation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_margin"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:layout_marginEnd="@dimen/activity_margin"
-                android:hint="@string/occupation" />
-
-            <EditText
-                android:id="@+id/hidden_occupation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/occupation"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_margin"
-                android:layout_marginTop="@dimen/medium_margin"
-
-                android:layout_marginEnd="@dimen/activity_margin"
-                android:text="@string/email"
-                android:textColor="@color/colorPrimary" />
-
-            <EditText
-                android:id="@+id/hidden_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/email"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/btn_done"
+                android:id="@+id/edit_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Done"
+                android:drawableStart="@drawable/ic_edit_black_24dp"
+                android:drawablePadding="@dimen/medium_margin"
+                android:text="Edit Password"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_marginTop="@dimen/activity_margin"/>
+
+
+
+
+            <LinearLayout
+                android:id="@+id/confirm_password_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:layout_gravity="center"
-                android:textColor="@color/colorWhite"
-                android:background="@color/colorPrimary"/>
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/passwordLayout"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:layout_marginEnd="@dimen/medium_margin"
+                    app:errorEnabled="true"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/colorPrimary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/passwordEdit"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/CurrentPassword"
+                        android:theme="@style/TextInputLayoutAppearance"
+                        android:textColorHint="@color/colorLightGray"
+                        android:inputType="textPassword"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/confirm_passwordLayout"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:layout_marginEnd="@dimen/medium_margin"
+                    app:errorEnabled="true"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/colorPrimary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/confirm_passwordEdit"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/new_password"
+                        android:theme="@style/TextInputLayoutAppearance"
+                        android:textColorHint="@color/colorLightGray"
+                        android:inputType="textPassword"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                    android:id="@+id/btn_done"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:background="@drawable/circular_border_shape"
+                    android:text="@string/done"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    app:initialCornerAngle="27dp"
+                    app:spinning_bar_color="#FFF"
+                    app:spinning_bar_padding="6dp"
+                    app:spinning_bar_width="4dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
-        </ScrollView>
-    </com.google.android.material.card.MaterialCardView>
+        </androidx.core.widget.NestedScrollView>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>
 
 

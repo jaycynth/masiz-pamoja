@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.julie.masizpamoja.R;
 import com.julie.masizpamoja.models.MainAction;
 import com.julie.masizpamoja.views.activities.Blogs;
+import com.julie.masizpamoja.views.activities.ChatRoomActivity;
 import com.julie.masizpamoja.views.activities.NeedHelp;
 import com.julie.masizpamoja.views.activities.UpcomingEvents;
 
@@ -81,14 +82,17 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
         MainAction mainAction = actionList.get(adapterPosition);
         if (mainAction.getName().equalsIgnoreCase("Blog")) {
-            Intent restaurantDetailIntent = new Intent(context, Blogs.class);
-            context.startActivity(restaurantDetailIntent);
+            Intent mainActionDetail = new Intent(context, Blogs.class);
+            context.startActivity(mainActionDetail);
         } else if (mainAction.getName().equalsIgnoreCase("Upcoming Events")) {
-            Intent restaurantDetailIntent = new Intent(context, UpcomingEvents.class);
-            context.startActivity(restaurantDetailIntent);
+            Intent mainActionDetail = new Intent(context, UpcomingEvents.class);
+            context.startActivity(mainActionDetail);
         } else if (mainAction.getName().equalsIgnoreCase("Need Help")) {
-            Intent restaurantDetailIntent = new Intent(context, NeedHelp.class);
-            context.startActivity(restaurantDetailIntent);
+            Intent mainActionDetail = new Intent(context, NeedHelp.class);
+            context.startActivity(mainActionDetail);
+        } else if (mainAction.getName().equalsIgnoreCase("Chat Room")) {
+            Intent mainActionDetail = new Intent(context, ChatRoomActivity.class);
+            context.startActivity(mainActionDetail);
         }
 
 

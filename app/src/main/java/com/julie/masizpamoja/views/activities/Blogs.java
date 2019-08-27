@@ -7,6 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.julie.masizpamoja.R;
 import com.julie.masizpamoja.adapters.AllBlogsAdapter;
@@ -15,6 +19,8 @@ import com.julie.masizpamoja.models.Blog;
 import com.julie.masizpamoja.utils.SharedPreferencesManager;
 import com.julie.masizpamoja.viewmodels.BlogsViewModel;
 
+
+import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,6 +40,12 @@ public class Blogs extends AppCompatActivity {
 
     private List<Blog> allBlogsList;
 
+    @BindView(R.id.holder_layout)
+    RelativeLayout holderLayout;
+
+    @BindView(R.id.spin_kit)
+    ProgressBar circularProgressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +59,7 @@ public class Blogs extends AppCompatActivity {
 
         blogsViewModel = ViewModelProviders.of(this).get(BlogsViewModel.class);
 
+        startProgressBar();
         blogsViewModel.allBlogs("Bearer " + accessToken);
 
         blogsViewModel.getAllBlogsResponse().observe(this, allBlogsState -> {
@@ -57,11 +70,11 @@ public class Blogs extends AppCompatActivity {
             }
 
             if (allBlogsState.getErrorThrowable() != null) {
-                handleError(allBlogsState.getErrorThrowable());
+                handleErrorThrowable(allBlogsState.getErrorThrowable());
             }
 
             if (allBlogsState.getMessage() != null) {
-                handleNetworkResponse(allBlogsState.getMessage());
+                handleError(allBlogsState.getMessage());
             }
 
         });
@@ -69,16 +82,36 @@ public class Blogs extends AppCompatActivity {
 
     }
 
-    private void handleNetworkResponse(String message) {
+    private void startProgressBar() {
+        circularProgressBar.setVisibility(View.VISIBLE);
+        holderLayout.setAlpha(0.0f);
 
     }
 
-    private void handleError(Throwable errorThrowable) {
+    private void stopProgressBar() {
+        circularProgressBar.setVisibility(View.GONE);
+        holderLayout.setAlpha(1);
+    }
+
+    private void handleError(String message) {
+        stopProgressBar();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
+
+    private void handleErrorThrowable(Throwable errorThrowable) {
+        stopProgressBar();
+        if (errorThrowable instanceof IOException) {
+            Toast.makeText(this, "network failure", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
     private void handleAllBlogs(AllBlogs allAllBlogs) {
-
+       stopProgressBar();
         boolean status= allAllBlogs.getStatus();
         if(status){
             allBlogsList = allAllBlogs.getBlogs();

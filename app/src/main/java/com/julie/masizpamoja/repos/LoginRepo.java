@@ -38,12 +38,14 @@ public class LoginRepo {
                 if (response.code() == 200) {
                     loginStateMutableLiveData.setValue(new LoginState(response.body()));
 
-                } else if (response.code() == 422) {
+
+                }else if(response.code() == 401 || response.code() == 404 || response.code() == 422){
                     Gson gson = new Gson();
                     Type type = new TypeToken<LoginError>() {}.getType();
                     LoginError loginError = gson.fromJson(response.errorBody().charStream(),type);
                     loginStateMutableLiveData.setValue(new LoginState(loginError));
-                }else {
+                }
+                else {
                     if (BuildConfig.DEBUG){
                         loginStateMutableLiveData.setValue(new LoginState(response.message()));
 

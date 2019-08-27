@@ -55,7 +55,17 @@ dependencies {
 
     implementation 'br.com.simplepass:loading-button-android:2.1.5'
 
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
 
+    implementation 'com.google.android.libraries.places:places:2.0.0'
+
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+    implementation 'com.karumi:dexter:5.0.0'
+
+    implementation 'com.github.ybq:Android-SpinKit:1.2.0'
+
+    implementation 'com.azoft.carousellayoutmanager:carousel:1.2.4'
 
 
 }

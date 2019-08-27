@@ -1,14 +1,12 @@
 package com.julie.masizpamoja.views.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             if (loginState.getLoginError() != null) {
                 handleLoginError(loginState.getLoginError());
             }
+
         });
 
 
@@ -90,12 +89,15 @@ public class LoginActivity extends AppCompatActivity {
             String email = emailEdit.getText().toString().trim();
             String password = passwordEdit.getText().toString().trim();
 
-            signIn(email, password);
+            Login(email, password);
             hideKeyboard();
 
         });
 
     }
+
+
+
     private void hideKeyboard(){
         try{
             InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -106,6 +108,8 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
 
 
     private void handleLoginError(LoginError loginError) {
@@ -135,6 +139,9 @@ public class LoginActivity extends AppCompatActivity {
         boolean status = allLogins.getStatus();
         if (status) {
             SharedPreferencesManager.getInstance(this).saveToken(allLogins.getAccessToken());
+            SharedPreferencesManager.getInstance(this).saveNames(allLogins.getUser().getName());
+            SharedPreferencesManager.getInstance(this).saveUserImage(allLogins.getUser().getProfile());
+
 
             Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
             homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -143,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void signIn(String email, String password) {
+    private void Login(String email, String password) {
         if (!validateInputs(email, password)) {
             return;
         }

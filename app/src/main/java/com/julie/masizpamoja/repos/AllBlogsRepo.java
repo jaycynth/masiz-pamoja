@@ -25,20 +25,20 @@ public class AllBlogsRepo {
 
     public LiveData<AllBlogsState> allBlogs(String accessToken) {
 
-        MutableLiveData<AllBlogsState> loginStateMutableLiveData = new MutableLiveData<>();
+        MutableLiveData<AllBlogsState> allBlogsStateMutableLiveData = new MutableLiveData<>();
         Call<AllBlogs> call = mApiClient.mApiservice().getAllBlogs(accessToken);
         call.enqueue(new Callback<AllBlogs>() {
             @Override
             public void onResponse(Call<AllBlogs> call, Response<AllBlogs> response) {
                 if (response.code() == 200) {
-                    loginStateMutableLiveData.setValue(new AllBlogsState(response.body()));
+                    allBlogsStateMutableLiveData.setValue(new AllBlogsState(response.body()));
 
                 } else {
                     if (BuildConfig.DEBUG){
-                        loginStateMutableLiveData.setValue(new AllBlogsState(response.message()));
+                        allBlogsStateMutableLiveData.setValue(new AllBlogsState(response.message()));
 
                     }else {
-                        loginStateMutableLiveData.setValue(new AllBlogsState("An error occurred"));
+                        allBlogsStateMutableLiveData.setValue(new AllBlogsState("An error occurred"));
                     }
 
                 }
@@ -46,11 +46,11 @@ public class AllBlogsRepo {
 
             @Override
             public void onFailure(Call<AllBlogs> call, Throwable t) {
-                loginStateMutableLiveData.setValue(new AllBlogsState(t));
+                allBlogsStateMutableLiveData.setValue(new AllBlogsState(t));
             }
         });
 
-        return loginStateMutableLiveData;
+        return allBlogsStateMutableLiveData;
 
     }
 }

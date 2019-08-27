@@ -12,9 +12,11 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,13 +29,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.julie.masizpamoja.R;
+import com.julie.masizpamoja.models.UpdatePassword;
 import com.julie.masizpamoja.utils.SharedPreferencesManager;
+import com.julie.masizpamoja.viewmodels.ProfileViewModel;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -47,8 +54,11 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
+import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.julie.masizpamoja.api.ApiEndpoints.PROFILE_URL;
 
 
 public class Profile extends Fragment {
@@ -56,33 +66,50 @@ public class Profile extends Fragment {
     @BindView(R.id.profile_image)
     ImageView profileImage;
 
-    @BindView(R.id.full_names)
-    TextView fullNames;
+
     @BindView(R.id.hidden_full_names)
-    EditText hiddenFullNames;
+    TextInputEditText hiddenFullNames;
 
-    @BindView(R.id.occupation)
-    TextView occupation;
-    @BindView(R.id.hidden_occupation)
-    EditText hiddenOccupation;
 
-    @BindView(R.id.email)
-    TextView email;
     @BindView(R.id.hidden_email)
-    EditText hiddenEmail;
+    TextInputEditText hiddenEmail;
 
-    @BindView(R.id.edit_profle_buttton)
-    ImageButton editProfileButton;
 
-    @BindView(R.id.btn_done)
-    Button done;
+    @BindView(R.id.edit_profile_picture)
+    ImageButton editProfilePicture;
+
+
 
     private static final String IMAGE_DIRECTORY = "/masizpamoja";
     private int GALLERY = 1, CAMERA = 2;
 
-    String path, nFullName, nOccupation, nEmail;
+    String path, nFullName, nImage, nEmail;
+
+    @BindView(R.id.edit_password)
+    TextView editPassword;
+
+    @BindView(R.id.passwordLayout)
+    TextInputLayout passwordLayout;
+    @BindView(R.id.passwordEdit)
+    TextInputEditText passwordEdit;
 
 
+    @BindView(R.id.confirm_passwordLayout)
+    TextInputLayout confrmPasswordLayout;
+    @BindView(R.id.confirm_passwordEdit)
+    TextInputEditText confirmPasswordEdit;
+
+    @BindView(R.id.confirm_password_layout)
+    LinearLayout confirmHolderLayout;
+
+    @BindView(R.id.btn_done)
+    CircularProgressButton done;
+
+    
+    ProfileViewModel profileViewModel;
+    
+    String accessToken;
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -92,73 +119,92 @@ public class Profile extends Fragment {
 
         ButterKnife.bind(this, view);
 
-        path = SharedPreferencesManager.getInstance(getActivity()).getUserImage();
-        Glide.with(getActivity()).load(path).error(R.drawable.ic_add_a_photo_black_24dp).into(profileImage);
+        profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
+        
+        accessToken = SharedPreferencesManager.getInstance(getActivity()).getToken();
+
+        profileViewModel.getUpdatePasswordResponse().observe(this, updatePasswordState -> {
+            if(updatePasswordState.getUpdatePassword() != null){
+                handleUpdatePassword(updatePasswordState.getUpdatePassword());
+            }
+
+            if(updatePasswordState.getErrorThrowable() != null){
+                handleErrorThrowable(updatePasswordState.getErrorThrowable());
+            }
+
+            if(updatePasswordState.getMessage() != null){
+                handleError(updatePasswordState.getMessage());
+            }
+        });
+
 
         nFullName = SharedPreferencesManager.getInstance(getActivity()).getNames();
-        fullNames.setText(nFullName);
-
-        nOccupation = SharedPreferencesManager.getInstance(getActivity()).getOccuption();
-        occupation.setText(nOccupation);
+        hiddenFullNames.setText(nFullName);
 
         nEmail = SharedPreferencesManager.getInstance(getActivity()).getEmail();
-        email.setText(nEmail);
+        hiddenEmail.setText(nEmail);
+
+        nImage = SharedPreferencesManager.getInstance(getActivity()).getUserImage();
+        Glide.with(getActivity()).load(PROFILE_URL + path).error(R.drawable.ic_person_black_24dp).into(profileImage);
+
+
 
 
         requestMultiplePermissions();
 
-        editProfileButton.setOnClickListener(v -> {
-            hiddenEmail.setVisibility(View.VISIBLE);
-            hiddenFullNames.setVisibility(View.VISIBLE);
-            hiddenOccupation.setVisibility(View.VISIBLE);
-            done.setVisibility(View.VISIBLE);
-
-            nFullName = hiddenFullNames.getText().toString().trim();
-            SharedPreferencesManager.getInstance(getActivity()).saveNames(nFullName);
-            nOccupation = hiddenOccupation.getText().toString().trim();
-            SharedPreferencesManager.getInstance(getActivity()).saveOccupation(nOccupation);
-            nEmail = hiddenEmail.getText().toString().trim();
-            SharedPreferencesManager.getInstance(getActivity()).saveEmail(nEmail);
-
-
-            fullNames.setText(nFullName);
-            occupation.setText(nOccupation);
-            email.setText(nEmail);
+        editPassword.setOnClickListener(v->{
+            confirmHolderLayout.setVisibility(View.VISIBLE);
         });
 
-        done.setOnClickListener(v -> {
-            hiddenEmail.setVisibility(View.GONE);
-            hiddenFullNames.setVisibility(View.GONE);
-            hiddenOccupation.setVisibility(View.GONE);
-            done.setVisibility(View.GONE);
 
-            fullNames.setText(nFullName);
-            occupation.setText(nOccupation);
-            email.setText(nEmail);
+        done.setOnClickListener(v -> {
+
+            String password = passwordEdit.getText().toString().trim();
+            String confirmPassword = confirmPasswordEdit.getText().toString().trim();
+
+            if(TextUtils.isEmpty(password)){
+                Toast.makeText(getActivity(), "Enter a password", Toast.LENGTH_SHORT).show();
+            }
+            else if(TextUtils.isEmpty(confirmPassword)){
+                Toast.makeText(getActivity(), "Confirm Your Password", Toast.LENGTH_SHORT).show();
+            }else{
+                done.startMorphAnimation();
+                profileViewModel.updatePassword(password,confirmPassword,"Bearer "+ accessToken);
+            }
+
+        });
+
+
+
+        editProfilePicture.setOnClickListener(v -> {
+            addPhotoDialog();
         });
 
         return view;
     }
 
+    private void handleUpdatePassword(UpdatePassword updatePassword) {
+        done.startMorphRevertAnimation();
+        Toast.makeText(getActivity(), updatePassword.getStatus(), Toast.LENGTH_SHORT).show();
+        confirmHolderLayout.setVisibility(View.GONE);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.add_photo) {
-            //add photo logic
-            addPhotoDialog();
+    }
 
+    private void handleErrorThrowable(Throwable errorThrowable) {
+        done.startMorphRevertAnimation();
+        if (errorThrowable instanceof IOException) {
+            Toast.makeText(getActivity(), "Network Failure", Toast.LENGTH_SHORT).show();
 
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.error_occurred), Toast.LENGTH_SHORT).show();
         }
-        return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.profile_menu, menu);
-
+    private void handleError(String message) {
+        done.startMorphRevertAnimation();
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
+
 
     private void addPhotoDialog() {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(getActivity());
@@ -204,6 +250,8 @@ public class Profile extends Fragment {
 
                     Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
                     profileImage.setImageBitmap(bitmap);
+                    SharedPreferencesManager.getInstance(getActivity()).saveUserImage(path);
+
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -214,6 +262,8 @@ public class Profile extends Fragment {
         } else if (requestCode == CAMERA) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             path = saveImage(thumbnail);
+            SharedPreferencesManager.getInstance(getActivity()).saveUserImage(path);
+
             profileImage.setImageBitmap(thumbnail);
             saveImage(thumbnail);
             Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();

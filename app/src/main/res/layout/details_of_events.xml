@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+    android:fillViewport="true"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/about_event_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about_event_title"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_margin="@dimen/activity_margin" />
+
+        <TextView
+            android:id="@+id/details_of_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/details_of_the_event"
+            android:textSize="18sp"
+            android:layout_margin="@dimen/activity_margin"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/step_to_margin"
+            android:layout_marginBottom="@dimen/step_to_margin"
+            android:orientation="vertical">
+
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <!--Register touch listener in this image to allow map to be zoomed in and out -->
+        <!--and prevent scrolling of the entire view while zooming-->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:id="@+id/transparent_image"
+            android:src="@drawable/transparent_image"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -3,30 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/holder_layout"
+android:orientation="vertical"
+    android:layout_margin="@dimen/activity_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".views.fragments.Support">
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
 
-        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/activity_margin">
+
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="@dimen/field_text_size"
-                android:text="@string/issue_title" />
+                android:text="@string/subject" />
 
-            <EditText
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/title_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/TextInputLayoutAppearance"
                 android:hint="@string/title" />
 
             <TextView
@@ -37,9 +36,11 @@
                 android:textSize="@dimen/field_text_size"
                 android:layout_marginTop="@dimen/medium_margin"/>
 
-            <EditText
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textArea_information"
                 android:layout_width="match_parent"
+                android:theme="@style/TextInputLayoutAppearance"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rectangle_bg"
                 android:gravity="top|start"
@@ -54,20 +55,23 @@
 
 
 
-            <Button
+            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
                 android:id="@+id/submit"
-                android:layout_width="250dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/activity_margin"
+                android:background="@drawable/circular_border_shape"
                 android:text="@string/submit"
                 android:textColor="@color/colorWhite"
-                android:background="@color/colorPrimary"/>
+                android:textStyle="bold"
+                app:initialCornerAngle="27dp"
+                app:spinning_bar_color="#FFF"
+                app:spinning_bar_padding="6dp"
+                app:spinning_bar_width="4dp" />
 
 
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
 
 
-</LinearLayout>

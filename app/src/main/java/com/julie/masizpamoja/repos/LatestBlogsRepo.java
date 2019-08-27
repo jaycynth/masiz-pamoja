@@ -26,20 +26,20 @@ public class LatestBlogsRepo {
 
     public LiveData<LatestBlogsState> latestBlogs(String accessToken) {
 
-        MutableLiveData<LatestBlogsState> loginStateMutableLiveData = new MutableLiveData<>();
+        MutableLiveData<LatestBlogsState> latestBlogsStateMutableLiveData = new MutableLiveData<>();
         Call<LatestBlogs> call = mApiClient.mApiservice().getLatestBlogs(accessToken);
         call.enqueue(new Callback<LatestBlogs>() {
             @Override
             public void onResponse(Call<LatestBlogs> call, Response<LatestBlogs> response) {
                 if (response.code() == 200) {
-                    loginStateMutableLiveData.setValue(new LatestBlogsState(response.body()));
+                    latestBlogsStateMutableLiveData.setValue(new LatestBlogsState(response.body()));
 
                 } else {
                     if (BuildConfig.DEBUG){
-                        loginStateMutableLiveData.setValue(new LatestBlogsState(response.message()));
+                        latestBlogsStateMutableLiveData.setValue(new LatestBlogsState(response.message()));
 
                     }else {
-                        loginStateMutableLiveData.setValue(new LatestBlogsState("An error occurred"));
+                        latestBlogsStateMutableLiveData.setValue(new LatestBlogsState("An error occurred"));
                     }
 
                 }
@@ -47,11 +47,11 @@ public class LatestBlogsRepo {
 
             @Override
             public void onFailure(Call<LatestBlogs> call, Throwable t) {
-                loginStateMutableLiveData.setValue(new LatestBlogsState(t));
+                latestBlogsStateMutableLiveData.setValue(new LatestBlogsState(t));
             }
         });
 
-        return loginStateMutableLiveData;
+        return latestBlogsStateMutableLiveData;
 
     }
 }

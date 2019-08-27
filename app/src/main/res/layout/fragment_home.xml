@@ -1,31 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/main_layout"
     android:layout_height="match_parent"
-    android:fillViewport="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".views.fragments.Home">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/holder_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:background="@color/colorWhite"
+        android:id="@+id/container_layout"
+
         android:layout_margin="@dimen/medium_margin"
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_margin"
+            android:layout_margin="8dp"
             android:text="@string/recent_blogs"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:textSize="18sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/random_blogs_recyclerView"
         android:layout_width="match_parent"
 
-        android:layout_height="200dp">
+        android:layout_height="300dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -36,7 +50,7 @@
     android:text="@string/explore"
     android:textColor="@color/black"
     android:textStyle="bold"
-    android:textSize="16sp"/>
+    android:textSize="18sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_actions_recyclerView"
@@ -49,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/more_info"
-        android:textSize="@dimen/field_text_size"
+        android:textSize="18sp"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_margin="@dimen/activity_margin"
@@ -63,13 +77,32 @@
         android:id="@+id/who_we_are"
         android:padding="32dp">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textStyle="bold"
+            android:layout_centerVertical="true"
+
             android:layout_marginStart="@dimen/activity_margin"
             android:text="@string/who_are_we"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="32dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp">
+
+            </ImageView>
+
+        </RelativeLayout>
+
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -82,18 +115,81 @@
         android:id="@+id/what_do_we_do"
         android:padding="32dp">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textStyle="bold"
+            android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/activity_margin"
             android:text="@string/what_do_we_do"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="32dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+        </RelativeLayout>
+
+
+
 
     </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
+    </androidx.core.widget.NestedScrollView>
 
 
-</ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/fab_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:layout_margin="4dp"
+            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:text="@string/share"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+          android:layout_toEndOf="@id/fab_text"
+        android:layout_margin="@dimen/activity_margin"
+        android:src="@drawable/ic_share_black_24dp" />
+    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_apps_black_24dp" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Large.ThreeBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:SpinKit_Color="@color/colorAccent" />
+
+</RelativeLayout>

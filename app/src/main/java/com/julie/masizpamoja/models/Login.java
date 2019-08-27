@@ -10,6 +10,9 @@ public class Login {
     @SerializedName("access_token")
     @Expose
     private String accessToken;
+    @SerializedName("user")
+    @Expose
+    private User user;
 
     public Boolean getStatus() {
         return status;
@@ -25,5 +28,13 @@ public class Login {
 
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

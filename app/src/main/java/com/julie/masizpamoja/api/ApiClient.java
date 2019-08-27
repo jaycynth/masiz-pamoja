@@ -1,29 +1,19 @@
 package com.julie.masizpamoja.api;
 
 import android.content.Context;
-import android.content.Intent;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.julie.masizpamoja.BuildConfig;
-import com.julie.masizpamoja.datastates.LoginState;
-import com.julie.masizpamoja.models.LoginError;
-import com.julie.masizpamoja.views.activities.LoginActivity;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.julie.masizpamoja.api.ApiEndoints.BASE_URL;
+import static com.julie.masizpamoja.api.ApiEndpoints.BASE_URL;
 
 public class ApiClient {
 
@@ -36,21 +26,21 @@ public class ApiClient {
         okHttpClient.connectTimeout(3, TimeUnit.MINUTES);
         okHttpClient.readTimeout(3,TimeUnit.MINUTES);
         okHttpClient.writeTimeout(3,TimeUnit.MINUTES);
-        okHttpClient.addInterceptor(chain -> {
-            Request request = chain.request();
-            Response response = chain.proceed(request);
-
-            //re-direct user to login
-            if (response.code() == 401 || response.code() == 500) {
-
-                Intent logoutIntent = new Intent(context, LoginActivity.class);
-                logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(logoutIntent);
-
-                return response;
-            }
-            return response;
-        });
+//        okHttpClient.addInterceptor(chain -> {
+//            Request request = chain.request();
+//            Response response = chain.proceed(request);
+//
+//            //re-direct user to login
+//            if (response.code() == 401 || response.code() == 500) {
+//
+//                Intent logoutIntent = new Intent(context, LoginActivity.class);
+//                logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                context.startActivity(logoutIntent);
+//
+//                return response;
+//            }
+//            return response;
+//        });
 
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
