@@ -10,4 +10,6 @@
     <dimen name="fab_margin">8dp</dimen>
     <dimen name="standard_55">70dp</dimen>
     <dimen name="step_to_margin">4dp</dimen>
+    <dimen name="spacing">6dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
 </resources>

@@ -118,11 +118,11 @@ public class BlogDetails extends AppCompatActivity {
         }
 
 
-        if (id == R.id.info) {
-            shareLink();
-            isMenuEnabled = true;
-            invalidateOptionsMenu();
-        }
+//        if (id == R.id.info) {
+//            shareLink();
+//            isMenuEnabled = true;
+//            invalidateOptionsMenu();
+//        }
         return super.onOptionsItemSelected(item);
     }
 

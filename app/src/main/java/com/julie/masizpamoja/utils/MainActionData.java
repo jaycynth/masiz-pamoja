@@ -19,7 +19,7 @@ public class MainActionData {
         MainAction blog2 = new MainAction(R.drawable.ic_help,"Need Help");
         actionList.add(blog2);
 
-        MainAction blog3= new MainAction("Chat Room");
+        MainAction blog3= new MainAction(R.drawable.ic_iconfinder_06_111027,"Chat Room");
         actionList.add(blog3);
 
 

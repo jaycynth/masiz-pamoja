@@ -67,6 +67,17 @@ dependencies {
 
     implementation 'com.azoft.carousellayoutmanager:carousel:1.2.4'
 
+    implementation 'com.android.support:recyclerview-v7:29.0.0'
+
+    implementation('com.github.nkzawa:socket.io-client:0.5.0') {
+        exclude group: 'org.json', module: 'json'
+    }
+
+
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+
+
 
 }
 apply plugin: 'com.jakewharton.butterknife'

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="username_colors">
+        <item>@color/colorAccent</item>
+        <item>@color/colorLightGray</item>
+        <item>@color/colorPrimary</item>
+        <item>@color/colorRed</item>
+        <item>@color/colorblack2</item>
+
+    </array>
+</resources>
