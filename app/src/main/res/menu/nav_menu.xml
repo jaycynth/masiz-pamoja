@@ -18,7 +18,12 @@
             app:showAsAction="never" />
 
 
-
+        <item
+            android:id="@+id/action_contact"
+            android:title="@string/contact"
+            android:icon="@drawable/ic_contacts_black_24dp"
+            android:enabled="true"
+            app:showAsAction="never"/>
 
 
             <item

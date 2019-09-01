@@ -21,6 +21,7 @@ import com.julie.masizpamoja.models.Logout;
 import com.julie.masizpamoja.utils.SharedPreferencesManager;
 import com.julie.masizpamoja.viewmodels.MainViewModel;
 import com.julie.masizpamoja.views.activities.LoginActivity;
+import com.julie.masizpamoja.views.fragments.Contacts;
 import com.julie.masizpamoja.views.fragments.Home;
 import com.julie.masizpamoja.views.fragments.Profile;
 import com.julie.masizpamoja.views.fragments.Settings;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Profile profile;
     Settings settings;
     Support support;
+    Contacts contacts;
 
     Fragment fragment = null;
 
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         profile = new Profile();
         settings = new Settings();
         support = new Support();
+        contacts = new Contacts();
 
         //load home fragment
         fragment = home;
@@ -167,6 +170,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.action_support:
                 fragment = support;
+                setTitle(menuItem.getTitle());
+                break;
+            case R.id.action_contact:
+                fragment = contacts;
                 setTitle(menuItem.getTitle());
                 break;
             case R.id.action_logout:

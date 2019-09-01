@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.julie.masizpamoja.R;
 import com.julie.masizpamoja.adapters.AllBlogsAdapter;
 import com.julie.masizpamoja.adapters.AllContactListAdapter;
@@ -36,26 +37,15 @@ public class HelpDeskDetails extends AppCompatActivity {
     @BindView(R.id.helpDeskDetails)
     TextView helpDeskDetails;
 
-    @BindView(R.id.contactsRv)
-    RecyclerView contactsRv;
 
-    AllContactListAdapter allContactListAdapter;
 
-    private static RecyclerView.LayoutManager layoutManager;
-
-    private List<ContactList> contactLists = new ArrayList<>();
+    @BindView(R.id.more_info)
+    FloatingActionButton moreInfo;
 
 
 
-    String mHelpDeskTitle,mHelpDeskDetails, accessToken;
+    String mHelpDeskTitle,mHelpDeskDetails;
 
-    HelpDeskViewModel helpDeskViewModel;
-    
-    @BindView(R.id.holder_layout)
-    CoordinatorLayout holderLayout;
-    
-    @BindView(R.id.spin_kit)
-    ProgressBar circularProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,78 +66,16 @@ public class HelpDeskDetails extends AppCompatActivity {
         helpDeskDetails.setText(mHelpDeskDetails);
 
 
-        helpDeskViewModel = ViewModelProviders.of(this).get(HelpDeskViewModel.class);
-
-        accessToken = SharedPreferencesManager.getInstance(this).getToken();
-
-        startProgressBar();
-        helpDeskViewModel.allContacts("Bearer "+ accessToken);
-
-        helpDeskViewModel.getAllContactListResponse().observe(this, allContactListState -> {
-
-            if(allContactListState.getAllContactList() !=null){
-                handleAllContacts(allContactListState.getAllContactList());
-            }
-
-            if(allContactListState.getErrorThrowable() != null){
-                handleErrorThrowable(allContactListState.getErrorThrowable());
-            }
-
-            if(allContactListState.getMessage() != null){
-                handleError(allContactListState.getMessage());
-            }
-        });
 
 
+      moreInfo.setOnClickListener(v->{
+          startActivity(new Intent(HelpDeskDetails.this,ContactsActivity.class));
+      });
 
 
     }
 
-    private void startProgressBar() {
-        circularProgressBar.setVisibility(View.VISIBLE);
-        holderLayout.setAlpha(0.0f);
 
-    }
-
-    private void stopProgressBar() {
-        circularProgressBar.setVisibility(View.GONE);
-        holderLayout.setAlpha(1);
-    }
-
-    private void handleAllContacts(AllContactList allContactList) {
-        
-        stopProgressBar();
-        boolean status = allContactList.getStatus();
-        if(status){
-            contactLists = allContactList.getContactList();
-            initView(contactLists);
-        }
-
-    }
-
-    private void initView(List<ContactList> contactLists) {
-
-        allContactListAdapter = new AllContactListAdapter(contactLists, this);
-        contactsRv.setAdapter(allContactListAdapter);
-        layoutManager = new LinearLayoutManager(this);
-        contactsRv.setLayoutManager(layoutManager);
-        contactsRv.setNestedScrollingEnabled(false);
-    }
-
-    private void handleErrorThrowable(Throwable errorThrowable) {
-        stopProgressBar();
-        if (errorThrowable instanceof IOException) {
-            Toast.makeText(this, "network failure", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void handleError(String message) {
-        stopProgressBar();
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
