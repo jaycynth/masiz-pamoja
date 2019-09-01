@@ -11,18 +11,10 @@
         android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginBottom="@dimen/medium_margin"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         android:text="contact name"/>
 
-
-
-    <TextView
-        android:id="@+id/contact_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/medium_margin"
-        android:drawableStart="@drawable/ic_email_black_24dp"
-        android:drawablePadding="@dimen/medium_margin"
-        android:text="contact email"/>
 
 
     <TextView
@@ -33,6 +25,15 @@
         android:drawableStart="@drawable/ic_phone_black_24dp"
         android:drawablePadding="@dimen/medium_margin"
         android:text="contact phone"/>
+
+    <TextView
+        android:id="@+id/contact_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:drawableStart="@drawable/ic_email_black_24dp"
+        android:drawablePadding="@dimen/medium_margin"
+        android:text="contact email"/>
 
 
     <View

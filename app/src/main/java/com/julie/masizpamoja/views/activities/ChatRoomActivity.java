@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -44,7 +46,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     private EditText textField;
     private ImageButton sendButton;
 
-    public static final String TAG  = "MainActivity";
+    public static final String TAG = "MainActivity";
     public static String uniqueId;
 
     private String Username;
@@ -60,19 +62,21 @@ public class ChatRoomActivity extends AppCompatActivity {
     SavedMessageViewModel savedMessageViewModel;
 
     private Socket mSocket;
+
     {
         try {
             mSocket = IO.socket("https://thawing-refuge-73399.herokuapp.com");
-        } catch (URISyntaxException e) {}
+        } catch (URISyntaxException e) {
+        }
     }
 
     @SuppressLint("HandlerLeak")
-    Handler handler2=new Handler(){
+    Handler handler2 = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Log.i(TAG, "handleMessage: typing stopped " + startTyping);
-            if(time == 0){
+            if (time == 0) {
                 setTitle("Chat Room");
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 Log.i(TAG, "handleMessage: typing stopped time is " + time);
@@ -101,21 +105,21 @@ public class ChatRoomActivity extends AppCompatActivity {
         uniqueId = UUID.randomUUID().toString();
         Log.i(TAG, "onCreate: " + uniqueId);
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             hasConnection = savedInstanceState.getBoolean("hasConnection");
         }
 
-        if(hasConnection){
+        if (hasConnection) {
             //display messages
-            savedMessageViewModel.getListLiveData().observe(this,savedMessages -> {
-                if(savedMessages != null && !savedMessages.isEmpty()){
+            savedMessageViewModel.getListLiveData().observe(this, savedMessages -> {
+                if (savedMessages != null && !savedMessages.isEmpty()) {
                     messageFormatList = savedMessages;
                     messageAdapter = new MessageAdapter(this, R.layout.item_message, messageFormatList);
                     messageListView.setAdapter(messageAdapter);
                 }
             });
 
-        }else {
+        } else {
             mSocket.connect();
             mSocket.on("connect user", onNewUser);
             mSocket.on("chat message", onNewMessage);
@@ -140,8 +144,8 @@ public class ChatRoomActivity extends AppCompatActivity {
         sendButton = findViewById(R.id.sendButton);
         messageListView = findViewById(R.id.messageListView);
 
-        savedMessageViewModel.getListLiveData().observe(this,savedMessages -> {
-            if(savedMessages != null && !savedMessages.isEmpty()){
+        savedMessageViewModel.getListLiveData().observe(this, savedMessages -> {
+            if (savedMessages != null && !savedMessages.isEmpty()) {
                 messageFormatList = savedMessages;
 
             }
@@ -161,7 +165,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         outState.putBoolean("hasConnection", hasConnection);
     }
 
-    public void onTypeButtonEnable(){
+    public void onTypeButtonEnable() {
         textField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -210,7 +214,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                         message = data.getString("message");
                         id = data.getString("uniqueId");
 
-                        addMessage(username,message,id);
+                        addMessage(username, message, id);
 
                         Log.i(TAG, "run: " + username + message + id);
 
@@ -235,13 +239,13 @@ public class ChatRoomActivity extends AppCompatActivity {
                 public void run() {
                     int length = args.length;
 
-                    if(length == 0){
+                    if (length == 0) {
                         return;
                     }
                     //Here i'm getting weird error..................///////run :1 and run: 0
                     Log.i(TAG, "run: ");
                     Log.i(TAG, "run: " + args.length);
-                    String username =args[0].toString();
+                    String username = args[0].toString();
                     try {
                         JSONObject object = new JSONObject(username);
                         username = object.getString("username");
@@ -251,7 +255,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                     SavedMessage format = new SavedMessage(null, username, null);
                     messageAdapter.add(format);
                     messageListView.smoothScrollToPosition(0);
-                    messageListView.scrollTo(0, messageAdapter.getCount()-1);
+                    messageListView.scrollTo(0, messageAdapter.getCount() - 1);
                     Log.i(TAG, "run: " + username);
                 }
             });
@@ -272,22 +276,22 @@ public class ChatRoomActivity extends AppCompatActivity {
                         String userName = data.getString("username") + " is Typing......";
                         String id = data.getString("uniqueId");
 
-                        if(id.equals(uniqueId)){
+                        if (id.equals(uniqueId)) {
                             typingOrNot = false;
-                        }else {
+                        } else {
                             setTitle(userName);
                         }
 
-                        if(typingOrNot){
+                        if (typingOrNot) {
 
-                            if(!startTyping){
+                            if (!startTyping) {
                                 startTyping = true;
-                                thread2=new Thread(
+                                thread2 = new Thread(
                                         new Runnable() {
                                             @Override
                                             public void run() {
-                                                while(time > 0) {
-                                                    synchronized (this){
+                                                while (time > 0) {
+                                                    synchronized (this) {
                                                         try {
                                                             wait(1000);
                                                             Log.i(TAG, "run: typing " + time);
@@ -303,7 +307,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                                         }
                                 );
                                 thread2.start();
-                            }else {
+                            } else {
                                 time = 2;
                             }
 
@@ -316,7 +320,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         }
     };
 
-    private void addMessage(String username, String message,String uniqueId) {
+    private void addMessage(String username, String message, String uniqueId) {
 
         SavedMessage savedMessage = new SavedMessage();
         savedMessage.setUsername(username);
@@ -326,10 +330,10 @@ public class ChatRoomActivity extends AppCompatActivity {
 
     }
 
-    public void sendMessage(View view){
+    public void sendMessage(View view) {
         Log.i(TAG, "sendMessage: ");
         String message = textField.getText().toString().trim();
-        if(TextUtils.isEmpty(message)){
+        if (TextUtils.isEmpty(message)) {
             Log.i(TAG, "sendMessage:2 ");
             return;
         }
@@ -342,16 +346,15 @@ public class ChatRoomActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.i(TAG, "sendMessage: 1"+ mSocket.emit("chat message", jsonObject));
+        Log.i(TAG, "sendMessage: 1" + mSocket.emit("chat message", jsonObject));
     }
-
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
 
-        if(isFinishing()){
+        if (isFinishing()) {
             Log.i(TAG, "onDestroy: ");
 
             JSONObject userId = new JSONObject();
@@ -368,12 +371,22 @@ public class ChatRoomActivity extends AppCompatActivity {
             mSocket.off("on typing", onTyping);
             Username = "";
             messageAdapter.clear();
-        }else {
+        } else {
             Log.i(TAG, "onDestroy: is rotating.....");
         }
 
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            super.onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
 
     
