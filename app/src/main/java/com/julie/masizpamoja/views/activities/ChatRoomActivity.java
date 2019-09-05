@@ -10,24 +10,19 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.julie.masizpamoja.R;
-import com.julie.masizpamoja.adapters.ChatBoxAdapter;
 import com.julie.masizpamoja.adapters.MessageAdapter;
 import com.julie.masizpamoja.models.SavedMessage;
 import com.julie.masizpamoja.utils.SharedPreferencesManager;
@@ -365,7 +360,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            mSocket.connect();
+            mSocket.disconnect();
             mSocket.off("chat message", onNewMessage);
             mSocket.off("connect user", onNewUser);
             mSocket.off("on typing", onTyping);

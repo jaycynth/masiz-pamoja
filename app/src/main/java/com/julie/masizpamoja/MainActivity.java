@@ -3,6 +3,7 @@ package com.julie.masizpamoja;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -58,6 +60,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MainViewModel mainViewModel;
 
     String accessToken;
+
+    boolean doubleBackToExitPressedOnce;
+
 
     TextView navEmail;
     TextView navName;
@@ -200,6 +205,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         super.onStart();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawer.isDrawerOpen(GravityCompat.START) || fragmentManager.getBackStackEntryCount() > 0) {
+            mDrawer.closeDrawer(GravityCompat.START);
+
+            fragmentManager.popBackStack();
+
+
+        } else if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+        } else {
+            doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Press Back again to exit", Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
+
+
+        }
     }
 
 

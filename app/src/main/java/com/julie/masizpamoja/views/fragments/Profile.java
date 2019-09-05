@@ -109,6 +109,8 @@ public class Profile extends Fragment {
     ProfileViewModel profileViewModel;
     
     String accessToken;
+
+    boolean isVisible = false;
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -151,10 +153,14 @@ public class Profile extends Fragment {
 
 
         requestMultiplePermissions();
-
-        editPassword.setOnClickListener(v->{
-            confirmHolderLayout.setVisibility(View.VISIBLE);
-        });
+        if(!isVisible) {
+            editPassword.setOnClickListener(v -> {
+                isVisible = true;
+                confirmHolderLayout.setVisibility(View.VISIBLE);
+            });
+        }else{
+            confirmHolderLayout.setVisibility(View.GONE);
+        }
 
 
         done.setOnClickListener(v -> {

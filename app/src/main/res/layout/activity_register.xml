@@ -1,159 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorAccent"
-    android:padding="@dimen/activity_margin"
-    tools:context=".views.activities.RegisterActivity">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:padding="@dimen/activity_margin"
+	tools:context=".views.activities.RegisterActivity">
 
-    <LinearLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+	<LinearLayout
+		android:id="@+id/container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/activity_margin"
-            android:contentDescription="@string/logo"
-            android:src="@drawable/ic_launcher_background" />
+		<ImageView
+			android:layout_width="80dp"
+			android:layout_height="80dp"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginBottom="@dimen/activity_margin"
+			android:contentDescription="@string/logo"
+			android:src="@drawable/logo" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/medium_margin"
-            android:orientation="vertical">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_margin="@dimen/medium_margin"
+			android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:fontFamily="@font/robotolight"
-                android:text="@string/full_name"
-                android:textSize="@dimen/field_text_size" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/medium_margin"
+				android:fontFamily="@font/robotolight"
+				android:text="@string/full_name"
+				android:textSize="@dimen/field_text_size" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nameLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true">
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/nameLayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:errorEnabled="true">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nameEdit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textCapSentences"
-                    android:theme="@style/TextInputLayoutAppearance"
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/nameEdit"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:inputType="textCapSentences"
+					android:theme="@style/TextInputLayoutAppearance"
 
-                    android:padding="@dimen/medium_margin" />
-            </com.google.android.material.textfield.TextInputLayout>
+					android:padding="@dimen/medium_margin" />
+			</com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/robotolight"
-                android:text="@string/your_email"
-                android:textSize="@dimen/field_text_size" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/robotolight"
+				android:text="@string/your_email"
+				android:textSize="@dimen/field_text_size" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/emailLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true">
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/emailLayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:errorEnabled="true">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/emailEdit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:theme="@style/TextInputLayoutAppearance"
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/emailEdit"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:inputType="textEmailAddress"
+					android:theme="@style/TextInputLayoutAppearance"
 
-                    android:padding="@dimen/medium_margin" />
-            </com.google.android.material.textfield.TextInputLayout>
+					android:padding="@dimen/medium_margin" />
+			</com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/robotolight"
-                android:text="@string/password"
-                android:textSize="@dimen/field_text_size" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/robotolight"
+				android:text="@string/password"
+				android:textSize="@dimen/field_text_size" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/passwordLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/colorPrimary">
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/passwordLayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:errorEnabled="true"
+				app:passwordToggleEnabled="true"
+				app:passwordToggleTint="@color/colorPrimary">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/passwordEdit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextInputLayoutAppearance"
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/passwordEdit"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:theme="@style/TextInputLayoutAppearance"
 
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
+					android:inputType="textPassword" />
+			</com.google.android.material.textfield.TextInputLayout>
+		</LinearLayout>
 
 
 
-        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-            android:id="@+id/cirLoginButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/circular_border_shape"
-            android:text="@string/sign_up"
-            android:textColor="@color/colorWhite"
-            android:textStyle="bold"
-            app:initialCornerAngle="27dp"
-            app:spinning_bar_color="#FFF"
-            app:spinning_bar_padding="6dp"
-            app:spinning_bar_width="4dp" />
+
+		<br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+			android:id="@+id/cirLoginButton"
+			android:layout_width="250dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginTop="8dp"
+			android:background="@drawable/circular_border_shape"
+			android:text="@string/sign_up"
+			android:textColor="@color/colorWhite"
+			android:textStyle="bold"
+			app:initialCornerAngle="27dp"
+			app:spinning_bar_color="#FFF"
+			app:spinning_bar_padding="6dp"
+			app:spinning_bar_width="4dp" />
 
 
-        <RelativeLayout
-            android:id="@+id/signInRel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_margin"
-            android:gravity="center_horizontal">
+		<RelativeLayout
+			android:id="@+id/signInRel"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/activity_margin"
+			android:gravity="center_horizontal">
 
-            <TextView
-                android:id="@+id/noAccountText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/robotolight"
-                android:text="@string/sign_in_statement"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp" />
-
-
-            <TextView
-                android:id="@+id/sign_in"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_small_margin"
-                android:layout_toEndOf="@id/noAccountText"
-                android:fontFamily="@font/robotolight"
-                android:text="@string/sign_in"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+			<TextView
+				android:id="@+id/noAccountText"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/robotolight"
+				android:text="@string/sign_in_statement"
+				android:textColor="@color/colorPrimary"
+				android:textSize="18sp" />
 
 
-        </RelativeLayout>
+			<TextView
+				android:id="@+id/sign_in"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/activity_small_margin"
+				android:layout_toEndOf="@id/noAccountText"
+				android:fontFamily="@font/robotolight"
+				android:text="@string/sign_in"
+				android:textColor="@color/colorPrimaryDark"
+				android:textSize="18sp"
+				android:textStyle="bold" />
 
 
-    </LinearLayout>
+		</RelativeLayout>
+
+
+	</LinearLayout>
 
 </ScrollView>

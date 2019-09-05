@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MessageAdapter extends ArrayAdapter<SavedMessage> {
-    private List<SavedMessage> messages = new ArrayList<>();
+    private List<SavedMessage> messages;
 
     public MessageAdapter(Context context, int resource, List<SavedMessage> messages) {
         super(context, resource, messages);
