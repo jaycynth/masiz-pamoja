@@ -85,12 +85,14 @@
 
         <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/signInBtn"
-            android:layout_width="250dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:text="@string/sign_in"
             android:textColor="@color/colorWhite"
+            android:background="@drawable/circular_border_shape"
+
             android:textStyle="bold"
             app:initialCornerAngle="27dp"
             app:spinning_bar_color="#FFF"
