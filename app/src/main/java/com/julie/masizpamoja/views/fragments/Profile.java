@@ -321,7 +321,7 @@ public class Profile extends Fragment {
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         // check if all permissions are granted
                         if (report.areAllPermissionsGranted()) {
-                            Toast.makeText(getActivity(), "All permissions are granted by user!", Toast.LENGTH_SHORT).show();
+                        Log.d( "Tag","All permissions are granted by user!");
                         }
 
                         // check for permanent denial of any permission
