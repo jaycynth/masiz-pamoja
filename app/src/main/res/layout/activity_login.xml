@@ -83,6 +83,30 @@
 
         </RelativeLayout>
 
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/terms_and_conditions"
+            android:layout_width="wrap_content"
+            android:padding="2dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/terms_and_conditions_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_toEndOf="@id/terms_and_conditions"
+            android:text="I agree to the terms and conditions apply"/>
+
+        </RelativeLayout>
+
+
+
         <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/signInBtn"
             android:layout_width="wrap_content"

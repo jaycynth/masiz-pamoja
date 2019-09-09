@@ -3,13 +3,6 @@ package com.julie.masizpamoja.views.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +12,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,7 +32,6 @@ import com.julie.masizpamoja.utils.SharedPreferencesManager;
 import com.julie.masizpamoja.viewmodels.HomeViewModel;
 import com.julie.masizpamoja.views.activities.AboutUs;
 import com.julie.masizpamoja.views.activities.OurActivities;
-
 
 import java.io.IOException;
 import java.util.List;
@@ -234,5 +231,7 @@ public class Home extends Fragment {
         main_action_recyclerview.setAdapter(mainAdapter);
         main_action_recyclerview.setNestedScrollingEnabled(false);
     }
+
+
 
 }
