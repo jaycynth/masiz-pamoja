@@ -7,9 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
-import com.julie.masizpamoja.datastates.LatestBlogsState;
 import com.julie.masizpamoja.datastates.LogoutState;
-import com.julie.masizpamoja.repos.LatestBlogsRepo;
 import com.julie.masizpamoja.repos.LogoutRepo;
 
 public class MainViewModel extends AndroidViewModel {

@@ -17,42 +17,42 @@ import retrofit2.Response;
 
 public class HelpDeskRepo {
 
-    private ApiClient mApiClient;
+  private ApiClient mApiClient;
 
-    //constructor
-    public HelpDeskRepo(Application application) {
-        mApiClient = new ApiClient(application);
+  //constructor
+  public HelpDeskRepo(Application application) {
+    mApiClient = new ApiClient(application);
 
-    }
+  }
 
-    public LiveData<HelpDeskState> helpDesk(String accessToken) {
+  public LiveData<HelpDeskState> helpDesk(String accessToken) {
 
-        MutableLiveData<HelpDeskState> helpDeskStateMutableLiveData = new MutableLiveData<>();
-        Call<EntryHelpDesk> call = mApiClient.mApiservice().getHelpDesk(accessToken);
-        call.enqueue(new Callback<EntryHelpDesk>() {
-            @Override
-            public void onResponse(Call<EntryHelpDesk> call, Response<EntryHelpDesk> response) {
-                if (response.code() == 200) {
-                    helpDeskStateMutableLiveData.setValue(new HelpDeskState(response.body()));
+    MutableLiveData<HelpDeskState> helpDeskStateMutableLiveData = new MutableLiveData<>();
+    Call<EntryHelpDesk> call = mApiClient.mApiservice().getHelpDesk(accessToken);
+    call.enqueue(new Callback<EntryHelpDesk>() {
+      @Override
+      public void onResponse(Call<EntryHelpDesk> call, Response<EntryHelpDesk> response) {
+        if (response.code() == 200) {
+          helpDeskStateMutableLiveData.setValue(new HelpDeskState(response.body()));
 
-                } else {
-                    if (BuildConfig.DEBUG){
-                        helpDeskStateMutableLiveData.setValue(new HelpDeskState(response.message()));
+        } else {
+          if (BuildConfig.DEBUG){
+            helpDeskStateMutableLiveData.setValue(new HelpDeskState(response.message()));
 
-                    }else {
-                        helpDeskStateMutableLiveData.setValue(new HelpDeskState("An error occurred"));
-                    }
+          }else {
+            helpDeskStateMutableLiveData.setValue(new HelpDeskState("An error occurred"));
+          }
 
-                }
-            }
+        }
+      }
 
-            @Override
-            public void onFailure(Call<EntryHelpDesk> call, Throwable t) {
-                helpDeskStateMutableLiveData.setValue(new HelpDeskState(t));
-            }
-        });
+      @Override
+      public void onFailure(Call<EntryHelpDesk> call, Throwable t) {
+        helpDeskStateMutableLiveData.setValue(new HelpDeskState(t));
+      }
+    });
 
-        return helpDeskStateMutableLiveData;
+    return helpDeskStateMutableLiveData;
 
-    }
+  }
 }
