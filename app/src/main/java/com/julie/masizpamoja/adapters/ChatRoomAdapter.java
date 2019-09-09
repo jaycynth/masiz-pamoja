@@ -1,104 +1,168 @@
-//package com.julie.masizpamoja.adapters;
-//
-//import android.content.Context;
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.ViewGroup;
-//import android.widget.TextView;
-//
-//import androidx.annotation.NonNull;
-//import androidx.recyclerview.widget.RecyclerView;
-//
-//import com.julie.masizpamoja.R;
-//import com.julie.masizpamoja.models.Message;
-//import com.julie.masizpamoja.models.SavedMessage;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import butterknife.ButterKnife;
-//
-//public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ChatRoomViewHolder> {
-//
-//    private List<Message> mMessages;
-//    private int[] mUsernameColors;
-//
-//    public ChatRoomAdapter(Context context, List<Message> messages) {
-//        mMessages = messages;
-//        mUsernameColors = context.getResources().getIntArray(R.array.username_colors);
-//    }
-//
-//    @NonNull
-//    @Override
-//    public ChatRoomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//
-//        int layout = -1;
-//        switch (viewType) {
-////            case Message.TYPE_MESSAGE:
-////                layout = R.layout.item_message1;
-////                break;
-////            case Message.TYPE_LOG:
-////                layout = R.layout.item_log;
-////                break;
-////            case Message.TYPE_ACTION:
-////                layout = R.layout.item_action;
-////                break;
-//        }
-//        View v = LayoutInflater
-//                .from(parent.getContext())
-//                .inflate(layout, parent, false);
-//        return new ChatRoomViewHolder(v);
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(@NonNull ChatRoomViewHolder holder, int position) {
-//
-//        Message message = mMessages.get(position);
-//        holder.setMessage(message.getMessage());
-//        holder.setUsername(message.getUsername());
-//
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return mMessages.size();
-//    }
-//
-//    @Override
-//    public int getItemViewType(int position) {
-//        return mMessages.get(position).getType();
-//    }
-//
-//    public class ChatRoomViewHolder extends RecyclerView.ViewHolder {
-//
-//        private TextView mUsernameView;
-//        private TextView mMessageView;
-//
-//        public ChatRoomViewHolder(@NonNull View itemView) {
-//            super(itemView);
-//
-//            mUsernameView = (TextView) itemView.findViewById(R.id.username);
-//            mMessageView = (TextView) itemView.findViewById(R.id.message);
-//        }
-//
-//        public void setUsername(String username) {
-//            if (null == mUsernameView) return;
-//            mUsernameView.setText(username);
-//            mUsernameView.setTextColor(getUsernameColor(username));
-//        }
-//
-//        public void setMessage(String message) {
-//            if (null == mMessageView) return;
-//            mMessageView.setText(message);
-//        }
-//
-//        private int getUsernameColor(String username) {
-//            int hash = 7;
-//            for (int i = 0, len = username.length(); i < len; i++) {
-//                hash = username.codePointAt(i) + (hash << 5) - hash;
-//            }
-//            int index = Math.abs(hash % mUsernameColors.length);
-//            return mUsernameColors[index];
-//        }
-//    }
-//}
+package com.julie.masizpamoja.adapters;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.julie.masizpamoja.R;
+import com.julie.masizpamoja.models.Message;
+import com.julie.masizpamoja.models.SavedMessage;
+import com.julie.masizpamoja.utils.SharedPreferencesManager;
+import com.julie.masizpamoja.views.activities.ChatRoomActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.ButterKnife;
+
+public class ChatRoomAdapter extends RecyclerView.Adapter {
+
+    private static final int VIEW_TYPE_MESSAGE_SENT = 1;
+    private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
+    private static final int VIEW_TYPE_CONNECTED = 3;
+
+
+    private List<SavedMessage> messageList;
+    private Context context;
+
+    public ChatRoomAdapter(Context context, List<SavedMessage> messageList) {
+        this.messageList = messageList;
+        this.context = context;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+
+        SavedMessage message = messageList.get(position);
+        if (message.getUniqueId() != null) {
+            if (message.getUniqueId().equals(SharedPreferencesManager.getInstance(context).getUniqueid())) {
+                return VIEW_TYPE_MESSAGE_SENT;
+
+            } else {
+                return VIEW_TYPE_MESSAGE_RECEIVED;
+
+            }
+        } else {
+            return VIEW_TYPE_CONNECTED;
+        }
+    }
+
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view;
+
+        if (viewType == VIEW_TYPE_MESSAGE_SENT) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_message, parent, false);
+            return new SentMessageHolder(view);
+        } else if (viewType == VIEW_TYPE_MESSAGE_RECEIVED) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.their_message, parent, false);
+            return new ReceivedMessageHolder(view);
+        } else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_connected, parent, false);
+            return new ChatRoomViewHolder(view);
+        }
+
+    }
+
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
+        SavedMessage message = messageList.get(position);
+
+        switch (holder.getItemViewType()) {
+            case VIEW_TYPE_MESSAGE_SENT:
+                ((SentMessageHolder) holder).bind(message);
+                break;
+            case VIEW_TYPE_MESSAGE_RECEIVED:
+                ((ReceivedMessageHolder) holder).bind(message);
+                break;
+            case VIEW_TYPE_CONNECTED:
+                ((ChatRoomViewHolder) holder).bind(message);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + holder.getItemViewType());
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return messageList.size();
+    }
+
+
+    private class SentMessageHolder extends RecyclerView.ViewHolder {
+        TextView messageText, timeText;
+
+        SentMessageHolder(View itemView) {
+            super(itemView);
+
+            messageText = (TextView) itemView.findViewById(R.id.message_body);
+            //timeText = (TextView) itemView.findViewById(R.id.text_message_time);
+        }
+
+        void bind(SavedMessage message) {
+            messageText.setText(message.getMessage());
+
+            // Format the stored timestamp into a readable String using method.
+            // timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
+        }
+    }
+
+
+    private class ReceivedMessageHolder extends RecyclerView.ViewHolder {
+        TextView messageText, nameText;
+        //ImageView profileImage;
+
+        ReceivedMessageHolder(View itemView) {
+            super(itemView);
+
+            messageText = (TextView) itemView.findViewById(R.id.message_body);
+            // timeText = (TextView) itemView.findViewById(R.id.text_message_time);
+            nameText = (TextView) itemView.findViewById(R.id.name);
+            //profileImage = (ImageView) itemView.findViewById(R.id.image_message_profile);
+        }
+
+        void bind(SavedMessage message) {
+            messageText.setText(message.getMessage());
+
+            // Format the stored timestamp into a readable String using method.
+            //timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
+
+            nameText.setText(message.getUsername());
+
+            // Insert the profile image from the URL into the ImageView.
+            //Utils.displayRoundImageFromUrl(mContext, message.getSender().getProfileUrl(), profileImage);
+        }
+    }
+
+
+    public class ChatRoomViewHolder extends RecyclerView.ViewHolder {
+
+
+        TextView messageText, timeText;
+
+        ChatRoomViewHolder(View itemView) {
+            super(itemView);
+
+            messageText = (TextView) itemView.findViewById(R.id.message_body);
+            //timeText = (TextView) itemView.findViewById(R.id.text_message_time);
+        }
+
+        void bind(SavedMessage message) {
+            messageText.setText(message.getMessage());
+
+            // Format the stored timestamp into a readable String using method.
+            // timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
+        }
+
+
+    }
+}

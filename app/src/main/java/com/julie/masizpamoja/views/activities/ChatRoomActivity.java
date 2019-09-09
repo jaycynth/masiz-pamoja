@@ -17,12 +17,16 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.julie.masizpamoja.R;
+import com.julie.masizpamoja.adapters.AllBlogsAdapter;
+import com.julie.masizpamoja.adapters.ChatRoomAdapter;
 import com.julie.masizpamoja.adapters.MessageAdapter;
 import com.julie.masizpamoja.models.SavedMessage;
 import com.julie.masizpamoja.utils.SharedPreferencesManager;
@@ -36,7 +40,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static com.julie.masizpamoja.utils.Constants.CHAT_SERVER_URL;
+
 public class ChatRoomActivity extends AppCompatActivity {
+
+    private static RecyclerView.LayoutManager layoutManager;
+
 
     private EditText textField;
     private ImageButton sendButton;
@@ -47,8 +56,8 @@ public class ChatRoomActivity extends AppCompatActivity {
     private String Username;
 
     private Boolean hasConnection = false;
-    private ListView messageListView;
-    private MessageAdapter messageAdapter;
+    private RecyclerView messageListView;
+    private ChatRoomAdapter messageAdapter;
 
     private Thread thread2;
     private boolean startTyping = false;
@@ -56,11 +65,14 @@ public class ChatRoomActivity extends AppCompatActivity {
 
     SavedMessageViewModel savedMessageViewModel;
 
+    List<SavedMessage> messageFormatList = new ArrayList<>();
+
+
     private Socket mSocket;
 
     {
         try {
-            mSocket = IO.socket("https://thawing-refuge-73399.herokuapp.com");
+            mSocket = IO.socket(CHAT_SERVER_URL);
         } catch (URISyntaxException e) {
         }
     }
@@ -82,7 +94,6 @@ public class ChatRoomActivity extends AppCompatActivity {
         }
     };
 
-    List<SavedMessage> messageFormatList = new ArrayList<>();
 
 
     @Override
@@ -97,28 +108,37 @@ public class ChatRoomActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Chat Room");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        uniqueId = UUID.randomUUID().toString();
+
+        if (SharedPreferencesManager.getInstance(this).getUniqueid() == null) {
+            uniqueId = UUID.randomUUID().toString();
+            SharedPreferencesManager.getInstance(this).saveUserId(uniqueId);
+        } else {
+            uniqueId = SharedPreferencesManager.getInstance(this).getUniqueid();
+        }
+
+        savedMessageViewModel.getListLiveData().observe(this, savedMessages -> {
+            if (savedMessages != null && !savedMessages.isEmpty()) {
+                messageFormatList = savedMessages;
+                initView(messageFormatList);
+
+            }
+        });
+
+
+
         Log.i(TAG, "onCreate: " + uniqueId);
 
         if (savedInstanceState != null) {
             hasConnection = savedInstanceState.getBoolean("hasConnection");
         }
 
-        if (hasConnection) {
-            //display messages
-            savedMessageViewModel.getListLiveData().observe(this, savedMessages -> {
-                if (savedMessages != null && !savedMessages.isEmpty()) {
-                    messageFormatList = savedMessages;
-                    messageAdapter = new MessageAdapter(this, R.layout.item_message, messageFormatList);
-                    messageListView.setAdapter(messageAdapter);
-                }
-            });
-
-        } else {
+        if (!hasConnection) {
             mSocket.connect();
             mSocket.on("connect user", onNewUser);
             mSocket.on("chat message", onNewMessage);
             mSocket.on("on typing", onTyping);
+
+
 
             JSONObject userId = new JSONObject();
             try {
@@ -138,20 +158,19 @@ public class ChatRoomActivity extends AppCompatActivity {
         textField = findViewById(R.id.textField);
         sendButton = findViewById(R.id.sendButton);
         messageListView = findViewById(R.id.messageListView);
-
-        savedMessageViewModel.getListLiveData().observe(this, savedMessages -> {
-            if (savedMessages != null && !savedMessages.isEmpty()) {
-                messageFormatList = savedMessages;
-
-            }
-        });
-
-        messageAdapter = new MessageAdapter(this, R.layout.item_message, messageFormatList);
-        messageListView.setAdapter(messageAdapter);
+        
 
         sendButton.setOnClickListener(this::sendMessage);
 
         onTypeButtonEnable();
+    }
+
+    private void initView(List<SavedMessage> messageFormatList) {
+        messageAdapter = new ChatRoomAdapter(this, messageFormatList);
+        messageListView.setAdapter(messageAdapter);
+        layoutManager = new LinearLayoutManager(this);
+        messageListView.setLayoutManager(layoutManager);
+        messageListView.setNestedScrollingEnabled(false);
     }
 
     @Override
@@ -209,13 +228,17 @@ public class ChatRoomActivity extends AppCompatActivity {
                         message = data.getString("message");
                         id = data.getString("uniqueId");
 
-                        addMessage(username, message, id);
 
                         Log.i(TAG, "run: " + username + message + id);
 
                         SavedMessage format = new SavedMessage(id, username, message);
                         Log.i(TAG, "run:4 ");
-                        messageAdapter.add(format);
+                        messageFormatList.add(format);
+                        messageAdapter.notifyDataSetChanged();
+                        initView(messageFormatList);
+
+                        addMessage(username, message, id);
+
                         Log.i(TAG, "run:5 ");
 
                     } catch (Exception e) {
@@ -248,9 +271,11 @@ public class ChatRoomActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     SavedMessage format = new SavedMessage(null, username, null);
-                    messageAdapter.add(format);
+                    messageFormatList.add(format);
+                    messageAdapter.notifyDataSetChanged();
+                    initView(messageFormatList);
                     messageListView.smoothScrollToPosition(0);
-                    messageListView.scrollTo(0, messageAdapter.getCount() - 1);
+                    messageListView.scrollTo(0, messageAdapter.getItemCount() - 1);
                     Log.i(TAG, "run: " + username);
                 }
             });
@@ -344,33 +369,33 @@ public class ChatRoomActivity extends AppCompatActivity {
         Log.i(TAG, "sendMessage: 1" + mSocket.emit("chat message", jsonObject));
     }
 
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        if (isFinishing()) {
-            Log.i(TAG, "onDestroy: ");
-
-            JSONObject userId = new JSONObject();
-            try {
-                userId.put("username", Username + " DisConnected");
-                mSocket.emit("connect user", userId);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            mSocket.disconnect();
-            mSocket.off("chat message", onNewMessage);
-            mSocket.off("connect user", onNewUser);
-            mSocket.off("on typing", onTyping);
-            Username = "";
-            messageAdapter.clear();
-        } else {
-            Log.i(TAG, "onDestroy: is rotating.....");
-        }
-
-    }
+//
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//
+//        if (isFinishing()) {
+//            Log.i(TAG, "onDestroy: ");
+//
+//            JSONObject userId = new JSONObject();
+//            try {
+//                userId.put("username", Username + " DisConnected");
+//                mSocket.emit("connect user", userId);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//            mSocket.disconnect();
+//            mSocket.off("chat message", onNewMessage);
+//            mSocket.off("connect user", onNewUser);
+//            mSocket.off("on typing", onTyping);
+//            Username = "";
+//
+//        } else {
+//            Log.i(TAG, "onDestroy: is rotating.....");
+//        }
+//
+//    }
 
 
     @Override
