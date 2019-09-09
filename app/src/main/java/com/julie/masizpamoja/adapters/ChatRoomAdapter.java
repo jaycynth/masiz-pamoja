@@ -10,15 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.julie.masizpamoja.R;
-import com.julie.masizpamoja.models.Message;
 import com.julie.masizpamoja.models.SavedMessage;
 import com.julie.masizpamoja.utils.SharedPreferencesManager;
-import com.julie.masizpamoja.views.activities.ChatRoomActivity;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.ButterKnife;
 
 public class ChatRoomAdapter extends RecyclerView.Adapter {
 
@@ -26,9 +21,9 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
     private static final int VIEW_TYPE_CONNECTED = 3;
 
-
     private List<SavedMessage> messageList;
     private Context context;
+
 
     public ChatRoomAdapter(Context context, List<SavedMessage> messageList) {
         this.messageList = messageList;
@@ -51,7 +46,6 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
             return VIEW_TYPE_CONNECTED;
         }
     }
-
 
     @NonNull
     @Override
@@ -105,27 +99,27 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
             super(itemView);
 
             messageText = (TextView) itemView.findViewById(R.id.message_body);
-            //timeText = (TextView) itemView.findViewById(R.id.text_message_time);
+            timeText = (TextView) itemView.findViewById(R.id.time_text);
         }
 
         void bind(SavedMessage message) {
             messageText.setText(message.getMessage());
 
             // Format the stored timestamp into a readable String using method.
-            // timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
+            timeText.setText(message.getCreatedAt());
         }
     }
 
 
     private class ReceivedMessageHolder extends RecyclerView.ViewHolder {
-        TextView messageText, nameText;
+        TextView messageText, nameText,timeText;
         //ImageView profileImage;
 
         ReceivedMessageHolder(View itemView) {
             super(itemView);
 
             messageText = (TextView) itemView.findViewById(R.id.message_body);
-            // timeText = (TextView) itemView.findViewById(R.id.text_message_time);
+            timeText = (TextView) itemView.findViewById(R.id.time_text);
             nameText = (TextView) itemView.findViewById(R.id.name);
             //profileImage = (ImageView) itemView.findViewById(R.id.image_message_profile);
         }
@@ -134,7 +128,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
             messageText.setText(message.getMessage());
 
             // Format the stored timestamp into a readable String using method.
-            //timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
+            timeText.setText(message.getCreatedAt());
 
             nameText.setText(message.getUsername());
 
@@ -147,20 +141,18 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
     public class ChatRoomViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView messageText, timeText;
+        TextView messageText;
 
         ChatRoomViewHolder(View itemView) {
             super(itemView);
 
             messageText = (TextView) itemView.findViewById(R.id.message_body);
-            //timeText = (TextView) itemView.findViewById(R.id.text_message_time);
         }
 
         void bind(SavedMessage message) {
-            messageText.setText(message.getMessage());
+            messageText.setText(message.getUsername());
 
-            // Format the stored timestamp into a readable String using method.
-            // timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
+
         }
 
 

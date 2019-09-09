@@ -38,4 +38,14 @@
         android:textSize="18sp"
         android:text="How are you doing? This is a long message that should probably wrap."
         />
+
+    <TextView
+        android:id="@+id/time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:padding="2dp"
+        android:layout_toEndOf="@id/message_body"
+        android:layout_alignBottom="@id/message_body"
+        android:text="time" />
 </RelativeLayout>

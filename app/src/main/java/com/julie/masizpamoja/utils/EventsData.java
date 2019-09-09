@@ -1,10 +1,5 @@
 package com.julie.masizpamoja.utils;
 
-import com.julie.masizpamoja.models.Event;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class EventsData {
 //    public static List<Event> getEvent(){
 //        List<Event> actionList = new ArrayList<>();

@@ -14,6 +14,7 @@ public class SavedMessage {
 
     private String Username;
     private String Message;
+    private String createdAt;
 
 
     public SavedMessage() {
@@ -23,6 +24,21 @@ public class SavedMessage {
         UniqueId = uniqueId;
         Username = username;
         Message = message;
+    }
+
+    public SavedMessage(String uniqueId, String username, String message, String createdAt) {
+        UniqueId = uniqueId;
+        Username = username;
+        Message = message;
+        this.createdAt = createdAt;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public int getId() {

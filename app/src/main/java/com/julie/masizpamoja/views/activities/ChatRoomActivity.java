@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,14 +19,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.julie.masizpamoja.R;
-import com.julie.masizpamoja.adapters.AllBlogsAdapter;
 import com.julie.masizpamoja.adapters.ChatRoomAdapter;
-import com.julie.masizpamoja.adapters.MessageAdapter;
 import com.julie.masizpamoja.models.SavedMessage;
 import com.julie.masizpamoja.utils.SharedPreferencesManager;
 import com.julie.masizpamoja.viewmodels.SavedMessageViewModel;
@@ -36,7 +32,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -94,12 +92,16 @@ public class ChatRoomActivity extends AppCompatActivity {
         }
     };
 
-
+    String strDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+        strDate = sdf.format(c.getTime());
 
         savedMessageViewModel = ViewModelProviders.of(this).get(SavedMessageViewModel.class);
 
@@ -223,21 +225,22 @@ public class ChatRoomActivity extends AppCompatActivity {
                     String username;
                     String message;
                     String id;
+                    String time;
                     try {
                         username = data.getString("username");
                         message = data.getString("message");
+                        time = data.getString("time");
                         id = data.getString("uniqueId");
 
 
-                        Log.i(TAG, "run: " + username + message + id);
+                        Log.i(TAG, "run: " + username + message + id + time);
 
-                        SavedMessage format = new SavedMessage(id, username, message);
+                        SavedMessage format = new SavedMessage(id, username, message,time);
                         Log.i(TAG, "run:4 ");
                         messageFormatList.add(format);
                         messageAdapter.notifyDataSetChanged();
-                        initView(messageFormatList);
 
-                        addMessage(username, message, id);
+                        addMessage(username, message, id,time);
 
                         Log.i(TAG, "run:5 ");
 
@@ -270,11 +273,12 @@ public class ChatRoomActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    SavedMessage format = new SavedMessage(null, username, null);
+                    SavedMessage format = new SavedMessage(null, username, null,null);
                     messageFormatList.add(format);
+
+
                     messageAdapter.notifyDataSetChanged();
-                    initView(messageFormatList);
-                    messageListView.smoothScrollToPosition(0);
+                    messageListView.smoothScrollToPosition(messageAdapter.getItemCount());
                     messageListView.scrollTo(0, messageAdapter.getItemCount() - 1);
                     Log.i(TAG, "run: " + username);
                 }
@@ -340,12 +344,13 @@ public class ChatRoomActivity extends AppCompatActivity {
         }
     };
 
-    private void addMessage(String username, String message, String uniqueId) {
+    private void addMessage(String username, String message, String uniqueId, String time) {
 
         SavedMessage savedMessage = new SavedMessage();
         savedMessage.setUsername(username);
         savedMessage.setMessage(message);
         savedMessage.setUniqueId(uniqueId);
+        savedMessage.setCreatedAt(time);
         savedMessageViewModel.saveMessage(savedMessage);
 
     }
@@ -353,6 +358,10 @@ public class ChatRoomActivity extends AppCompatActivity {
     public void sendMessage(View view) {
         Log.i(TAG, "sendMessage: ");
         String message = textField.getText().toString().trim();
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+        String t = sdf.format(c.getTime());
+        
         if (TextUtils.isEmpty(message)) {
             Log.i(TAG, "sendMessage:2 ");
             return;
@@ -363,7 +372,9 @@ public class ChatRoomActivity extends AppCompatActivity {
             jsonObject.put("message", message);
             jsonObject.put("username", Username);
             jsonObject.put("uniqueId", uniqueId);
+            jsonObject.put("time",t);
         } catch (JSONException e) {
+
             e.printStackTrace();
         }
         Log.i(TAG, "sendMessage: 1" + mSocket.emit("chat message", jsonObject));
