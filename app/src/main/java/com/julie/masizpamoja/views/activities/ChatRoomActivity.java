@@ -98,34 +98,15 @@ public class ChatRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
 
-
-
-        savedMessageViewModel = ViewModelProviders.of(this).get(SavedMessageViewModel.class);
-
-        Username = SharedPreferencesManager.getInstance(this).getNames();
-
         getSupportActionBar().setTitle("Chat Room");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        textField = findViewById(R.id.textField);
+        sendButton = findViewById(R.id.sendButton);
+        messageListView = findViewById(R.id.messageListView);
 
-        if (SharedPreferencesManager.getInstance(this).getUniqueid() == null) {
-            uniqueId = UUID.randomUUID().toString();
-            SharedPreferencesManager.getInstance(this).saveUserId(uniqueId);
-        } else {
-            uniqueId = SharedPreferencesManager.getInstance(this).getUniqueid();
-        }
+        Username = SharedPreferencesManager.getInstance(this).getNames();
 
-        savedMessageViewModel.getListLiveData().observe(this, savedMessages -> {
-            if (savedMessages != null && !savedMessages.isEmpty()) {
-                messageFormatList = savedMessages;
-                initView(messageFormatList);
-
-            }
-        });
-
-
-
-        Log.i(TAG, "onCreate: " + uniqueId);
 
         if (savedInstanceState != null) {
             hasConnection = savedInstanceState.getBoolean("hasConnection");
@@ -136,8 +117,6 @@ public class ChatRoomActivity extends AppCompatActivity {
             mSocket.on("connect user", onNewUser);
             mSocket.on("chat message", onNewMessage);
             mSocket.on("on typing", onTyping);
-
-
 
             JSONObject userId = new JSONObject();
             try {
@@ -150,18 +129,35 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         Log.i(TAG, "onCreate: " + hasConnection);
         hasConnection = true;
-
-
         Log.i(TAG, "onCreate: " + Username + " " + "Connected");
 
-        textField = findViewById(R.id.textField);
-        sendButton = findViewById(R.id.sendButton);
-        messageListView = findViewById(R.id.messageListView);
-        
+
+        savedMessageViewModel = ViewModelProviders.of(this).get(SavedMessageViewModel.class);
+
+        if (SharedPreferencesManager.getInstance(this).getUniqueid() == null) {
+            uniqueId = UUID.randomUUID().toString();
+            SharedPreferencesManager.getInstance(this).saveUserId(uniqueId);
+        } else {
+            uniqueId = SharedPreferencesManager.getInstance(this).getUniqueid();
+        }
+
+        Log.i(TAG, "onCreate: " + uniqueId);
+
+
+        savedMessageViewModel.getListLiveData().observe(this, savedMessages -> {
+            if (savedMessages != null && !savedMessages.isEmpty()) {
+                messageFormatList = savedMessages;
+                initView(messageFormatList);
+
+            }
+        });
+
+
 
         sendButton.setOnClickListener(this::sendMessage);
 
         onTypeButtonEnable();
+
     }
 
     private void initView(List<SavedMessage> messageFormatList) {
@@ -226,17 +222,22 @@ public class ChatRoomActivity extends AppCompatActivity {
                     try {
                         username = data.getString("username");
                         message = data.getString("message");
-                        time = data.getString("time");
                         id = data.getString("uniqueId");
+                        time = data.getString("time");
 
-
-                        Log.i(TAG, "run: " + username + message + id + time);
-
-                        SavedMessage format = new SavedMessage(id, username, message,time);
-                        Log.i(TAG, "run:4 ");
-                        messageFormatList.add(format);
 
                         addMessage(username, message, id,time);
+                        Log.i(TAG, "run: " + username + message + id + time);
+
+
+
+
+//                        SavedMessage format = new SavedMessage(id, username, message,time);
+//                        Log.i(TAG, "run:4 ");
+//                        messageFormatList.add(format);
+
+
+
 
                         Log.i(TAG, "run:5 ");
 
@@ -259,7 +260,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                     if (length == 0) {
                         return;
                     }
-                    //Here i'm getting weird error..................///////run :1 and run: 0
+                    //Here i'm getting weird error///////run :1 and run: 0
                     Log.i(TAG, "run: ");
                     Log.i(TAG, "run: " + args.length);
                     String username = args[0].toString();
@@ -271,6 +272,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                     }
                     SavedMessage format = new SavedMessage(null, username, null,null);
                     messageFormatList.add(format);
+                    initView(messageFormatList);
 
                     Log.i(TAG, "run: " + username);
                 }
@@ -310,6 +312,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                                                     synchronized (this) {
                                                         try {
                                                             wait(1000);
+
                                                             Log.i(TAG, "run: typing " + time);
                                                         } catch (InterruptedException e) {
                                                             e.printStackTrace();
@@ -375,32 +378,69 @@ public class ChatRoomActivity extends AppCompatActivity {
     }
 
 
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//
-//        if (isFinishing()) {
-//            Log.i(TAG, "onDestroy: ");
-//
-//            JSONObject userId = new JSONObject();
-//            try {
-//                userId.put("username", Username + " DisConnected");
-//                mSocket.emit("connect user", userId);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//
-//            mSocket.disconnect();
-//            mSocket.off("chat message", onNewMessage);
-//            mSocket.off("connect user", onNewUser);
-//            mSocket.off("on typing", onTyping);
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (!hasConnection) {
+            mSocket.connect();
+            mSocket.on("connect user", onNewUser);
+            mSocket.on("chat message", onNewMessage);
+            mSocket.on("on typing", onTyping);
+
+            JSONObject userId = new JSONObject();
+            try {
+                userId.put("username", Username + " Connected");
+                mSocket.emit("connect user", userId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Log.i(TAG, "onCreate: " + hasConnection);
+        hasConnection = true;
+        Log.i(TAG, "onCreate: " + Username + " " + "Connected");
+
+
+
+        savedMessageViewModel.getListLiveData().observe(this, savedMessages -> {
+            if (savedMessages != null && !savedMessages.isEmpty()) {
+                messageFormatList = savedMessages;
+                initView(messageFormatList);
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+
+
+        if (isFinishing()) {
+            Log.i(TAG, "onDestroy: ");
+
+            JSONObject userId = new JSONObject();
+            try {
+                userId.put("username", Username + " DisConnected");
+                mSocket.emit("connect user", userId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            mSocket.disconnect();
+            mSocket.off("chat message", onNewMessage);
+            mSocket.off("connect user", onNewUser);
+            mSocket.off("on typing", onTyping);
 //            Username = "";
-//
-//        } else {
-//            Log.i(TAG, "onDestroy: is rotating.....");
-//        }
-//
-//    }
+
+        } else {
+            Log.i(TAG, "onDestroy: is rotating.....");
+        }
+
+    }
 
 
     @Override
