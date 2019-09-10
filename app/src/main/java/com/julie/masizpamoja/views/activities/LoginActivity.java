@@ -1,15 +1,16 @@
 package com.julie.masizpamoja.views.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -47,6 +48,12 @@ public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.signInBtn)
     CircularProgressButton signInBtn;
+
+    @BindView(R.id.terms_and_conditions)
+    CheckBox termsAndConditions;
+
+    @BindView(R.id.terms_and_conditions_text)
+    TextView termsAndConditionsText;
 
     LoginViewModel loginViewModel;
 
@@ -89,32 +96,38 @@ public class LoginActivity extends AppCompatActivity {
             String email = emailEdit.getText().toString().trim();
             String password = passwordEdit.getText().toString().trim();
 
-            Login(email, password);
-            hideKeyboard();
+            if (termsAndConditions.isChecked()) {
+                Login(email, password);
+                hideKeyboard();
+            } else {
+                Toast.makeText(this, "Please agree to the terms and conditions first", Toast.LENGTH_SHORT).show();
+            }
 
         });
 
     }
 
 
-
-    private void hideKeyboard(){
-        try{
-            InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+    private void hideKeyboard() {
+        try {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             if (inputMethodManager != null) {
-                inputMethodManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(),0);
+                inputMethodManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+        termsAndConditionsText.setOnClickListener(v -> {
+            Toast.makeText(this, "terms and conditions", Toast.LENGTH_SHORT).show();
+        });
     }
-
-
 
 
     private void handleLoginError(LoginError loginError) {
         signInBtn.startMorphRevertAnimation();
-        Toast.makeText(getApplicationContext(),loginError.getMessage(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), loginError.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
 

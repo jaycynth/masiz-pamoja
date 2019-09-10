@@ -92,16 +92,12 @@ public class ChatRoomActivity extends AppCompatActivity {
         }
     };
 
-    String strDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
 
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
-        strDate = sdf.format(c.getTime());
 
         savedMessageViewModel = ViewModelProviders.of(this).get(SavedMessageViewModel.class);
 
@@ -238,7 +234,9 @@ public class ChatRoomActivity extends AppCompatActivity {
                         SavedMessage format = new SavedMessage(id, username, message,time);
                         Log.i(TAG, "run:4 ");
                         messageFormatList.add(format);
-                        messageAdapter.notifyDataSetChanged();
+                        messageAdapter.notifyItemInserted(messageAdapter.getItemCount()-1);
+                        messageListView.smoothScrollToPosition(messageAdapter.getItemCount()-1);
+                        //messageListView.scrollTo(0, messageAdapter.getItemCount() - 1);
 
                         addMessage(username, message, id,time);
 
@@ -275,10 +273,8 @@ public class ChatRoomActivity extends AppCompatActivity {
                     }
                     SavedMessage format = new SavedMessage(null, username, null,null);
                     messageFormatList.add(format);
-
-
-                    messageAdapter.notifyDataSetChanged();
-                    messageListView.smoothScrollToPosition(messageAdapter.getItemCount());
+                    messageAdapter.notifyItemInserted(messageAdapter.getItemCount()-1);
+                    messageListView.smoothScrollToPosition(messageAdapter.getItemCount()-1);
                     messageListView.scrollTo(0, messageAdapter.getItemCount() - 1);
                     Log.i(TAG, "run: " + username);
                 }
@@ -357,7 +353,9 @@ public class ChatRoomActivity extends AppCompatActivity {
 
     public void sendMessage(View view) {
         Log.i(TAG, "sendMessage: ");
+
         String message = textField.getText().toString().trim();
+
         Calendar c = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
         String t = sdf.format(c.getTime());
@@ -377,6 +375,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
             e.printStackTrace();
         }
+
         Log.i(TAG, "sendMessage: 1" + mSocket.emit("chat message", jsonObject));
     }
 
