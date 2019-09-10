@@ -99,6 +99,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_room);
 
 
+
         savedMessageViewModel = ViewModelProviders.of(this).get(SavedMessageViewModel.class);
 
         Username = SharedPreferencesManager.getInstance(this).getNames();
@@ -234,9 +235,6 @@ public class ChatRoomActivity extends AppCompatActivity {
                         SavedMessage format = new SavedMessage(id, username, message,time);
                         Log.i(TAG, "run:4 ");
                         messageFormatList.add(format);
-                        messageAdapter.notifyItemInserted(messageAdapter.getItemCount()-1);
-                        messageListView.smoothScrollToPosition(messageAdapter.getItemCount()-1);
-                        //messageListView.scrollTo(0, messageAdapter.getItemCount() - 1);
 
                         addMessage(username, message, id,time);
 
@@ -273,9 +271,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                     }
                     SavedMessage format = new SavedMessage(null, username, null,null);
                     messageFormatList.add(format);
-                    messageAdapter.notifyItemInserted(messageAdapter.getItemCount()-1);
-                    messageListView.smoothScrollToPosition(messageAdapter.getItemCount()-1);
-                    messageListView.scrollTo(0, messageAdapter.getItemCount() - 1);
+
                     Log.i(TAG, "run: " + username);
                 }
             });
@@ -375,11 +371,10 @@ public class ChatRoomActivity extends AppCompatActivity {
 
             e.printStackTrace();
         }
-
         Log.i(TAG, "sendMessage: 1" + mSocket.emit("chat message", jsonObject));
     }
 
-//
+
 //    @Override
 //    public void onDestroy() {
 //        super.onDestroy();
