@@ -3,36 +3,27 @@ package com.julie.masizpamoja.views.fragments;
 
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ViewSwitcher;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.textfield.TextInputEditText;
@@ -115,8 +106,6 @@ public class Profile extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        setHasOptionsMenu(true);
-
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         ButterKnife.bind(this, view);
@@ -147,7 +136,7 @@ public class Profile extends Fragment {
         hiddenEmail.setText(nEmail);
 
         nImage = SharedPreferencesManager.getInstance(getActivity()).getUserImage();
-        Glide.with(getActivity()).load(PROFILE_URL + path).error(R.drawable.ic_person_black_24dp).into(profileImage);
+        Glide.with(getActivity()).load(PROFILE_URL + path).into(profileImage);
 
 
 
@@ -199,7 +188,7 @@ public class Profile extends Fragment {
     private void handleErrorThrowable(Throwable errorThrowable) {
         done.startMorphRevertAnimation();
         if (errorThrowable instanceof IOException) {
-            Toast.makeText(getActivity(), "Network Failure", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "You are currently offline ", Toast.LENGTH_SHORT).show();
 
         } else {
             Toast.makeText(getActivity(), getString(R.string.error_occurred), Toast.LENGTH_SHORT).show();
