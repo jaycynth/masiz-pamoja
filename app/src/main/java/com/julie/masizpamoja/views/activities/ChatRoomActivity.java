@@ -42,7 +42,7 @@ import static com.julie.masizpamoja.utils.Constants.CHAT_SERVER_URL;
 
 public class ChatRoomActivity extends AppCompatActivity {
 
-    private static RecyclerView.LayoutManager layoutManager;
+    private static LinearLayoutManager layoutManager;
 
 
     private EditText textField;
@@ -164,6 +164,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         messageAdapter = new ChatRoomAdapter(this, messageFormatList);
         messageListView.setAdapter(messageAdapter);
         layoutManager = new LinearLayoutManager(this);
+        layoutManager.setStackFromEnd(true);
         messageListView.setLayoutManager(layoutManager);
         messageListView.setNestedScrollingEnabled(false);
     }
@@ -272,6 +273,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                     }
                     SavedMessage format = new SavedMessage(null, username, null,null);
                     messageFormatList.add(format);
+                    messageListView.smoothScrollToPosition(0);
                     initView(messageFormatList);
 
                     Log.i(TAG, "run: " + username);
