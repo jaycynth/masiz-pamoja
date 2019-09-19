@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_margin="@dimen/activity_margin"
+        android:paddingBottom="@dimen/medium_margin"
         android:layout_height="wrap_content">
 
         <TextView
@@ -36,21 +37,6 @@
             app:spinning_bar_padding="6dp"
             app:spinning_bar_width="4dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold"
-            android:layout_marginBottom="@dimen/medium_margin"
-            android:layout_marginTop="@dimen/activity_margin"
-            android:text="@string/our_core_values"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/core_values"
-            android:textSize="18sp" />
 
 
 
@@ -85,6 +71,23 @@
             android:layout_height="wrap_content"
             android:text="@string/vision_values"
             android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:text="@string/our_core_values"/>
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
 
     </LinearLayout>
 

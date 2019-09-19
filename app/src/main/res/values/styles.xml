@@ -27,6 +27,13 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="FilterDialogTheme" parent="Theme.AppCompat.Light.DialogWhenLarge">
+        <item name="android:layout_width">match_parent</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
+
+
 
 
     <style name="TextInputLayoutAppearance" parent="Widget.Design.TextInputLayout">

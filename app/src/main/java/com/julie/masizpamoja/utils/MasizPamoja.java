@@ -3,11 +3,6 @@ package com.julie.masizpamoja.utils;
 import android.app.Application;
 import android.content.Context;
 
-import com.github.nkzawa.socketio.client.IO;
-import com.github.nkzawa.socketio.client.Socket;
-
-import java.net.URISyntaxException;
-
 
 public class MasizPamoja extends Application {
 
@@ -36,4 +31,6 @@ public class MasizPamoja extends Application {
         mInstance = this;
 
     }
+
+
 }

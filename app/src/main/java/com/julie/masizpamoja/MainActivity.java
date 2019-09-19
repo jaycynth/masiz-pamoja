@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView navEmail;
     TextView navName;
 
+    String errorTag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,10 +77,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        fragmentManager = getSupportFragmentManager();
+
+
+        // Declare fragments here
+        home = new Home();
+        profile = new Profile();
+        settings = new Settings();
+        support = new Support();
+        contacts = new Contacts();
+
+
+        Intent tags = getIntent();
+        errorTag = tags.getStringExtra("Error");
+
+
+        if(errorTag != null) {
+            if (errorTag.equalsIgnoreCase("ErrorHome")) {
+                fragment = home;
+                getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout, fragment)
+                        .commitAllowingStateLoss();
+            }
+        }
+
+
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             Intent homeIntent = new Intent(this, LoginActivity.class);
             startActivity(homeIntent);
         }
+
+
 
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
@@ -101,15 +129,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         navView.setNavigationItemSelectedListener(this);
-
-        fragmentManager = getSupportFragmentManager();
-
-        // Declare fragments here
-        home = new Home();
-        profile = new Profile();
-        settings = new Settings();
-        support = new Support();
-        contacts = new Contacts();
 
         //load home fragment
         fragment = home;
@@ -226,9 +245,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
-
-
     private void logOut() {
         SharedPreferencesManager.getInstance(this).clear();
 
@@ -237,4 +253,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(i);
         finish();
     }
+
+
+
 }

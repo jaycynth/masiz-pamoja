@@ -106,6 +106,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
         blogDetails.putExtra("eventsDescription", event.getDescription());
         blogDetails.putExtra("eventsLongitude", event.getLongitude());
         blogDetails.putExtra("eventsLatitude", event.getLatitude());
+        blogDetails.putExtra("eventsImage",event.getCover());
 
         context.startActivity(blogDetails);
 

@@ -3,7 +3,9 @@ package com.julie.masizpamoja.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+
 public class HelpDesk {
+
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -19,6 +21,9 @@ public class HelpDesk {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("image")
+    @Expose
+    private String image;
 
     public Integer getId() {
         return id;
@@ -58,6 +63,14 @@ public class HelpDesk {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 }

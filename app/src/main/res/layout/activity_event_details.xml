@@ -46,16 +46,16 @@
                     <ImageView
                         android:id="@+id/cover_image"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
+                        android:layout_height="200dp"
                         android:scaleType="centerCrop" />
 
                             <TextView
                                 android:id="@+id/event_title"
                                 android:layout_width="wrap_content"
-                                android:layout_marginTop="-16dp"
                                 android:layout_below="@id/cover_image"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
+                                android:layout_marginTop="4dp"
                                 android:text="@string/title_event"
                                 android:layout_marginStart="@dimen/activity_margin"
                                 android:layout_marginBottom="@dimen/medium_margin"

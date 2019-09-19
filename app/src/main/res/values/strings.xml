@@ -60,7 +60,12 @@
     <string name="who_are_we_description">We are an organization focused in unifying and connecting women to information and services designed to address the growing concern on matters affecting women such as Gender based violence and Sexual and Reproductive Health rights (SRHR).</string>
     <string name="be_part_of_us">Be Part Of US</string>
     <string name="our_core_values">Our Core Values</string>
-    <string name="core_values">.Trust .Empathy .Support .Integrity .Boldness</string>
+    <string-array name="core_values">
+                       <item>Trust</item>
+                           <item>Empathy</item>
+        <item>Support</item>
+        <item> Integrity</item>
+        <item> Boldness</item>    </string-array>
     <string name="mission">Our Mission</string>
     <string name="mission_values">To provide a platform that informs, voices, connects, supports and solves the health dilemmas, social evils, and pave way for justice for the various affected women.</string>
     <string name="vision">Our Vision</string>
@@ -88,4 +93,6 @@
     <string name="contact">Contacts</string>
     <string name="masizPamojaTwitter">\@masizPamoja</string>
     <string name="moiuni">\@MoiUni</string>
+    <string name="about_us">About us</string>
+    <string name="need_help_image">need help image</string>
 </resources>

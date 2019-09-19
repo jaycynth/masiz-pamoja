@@ -16,6 +16,7 @@ import com.julie.masizpamoja.R;
 import com.julie.masizpamoja.models.MainAction;
 import com.julie.masizpamoja.views.activities.Blogs;
 import com.julie.masizpamoja.views.activities.ChatRoomActivity;
+import com.julie.masizpamoja.views.activities.ContactsActivity;
 import com.julie.masizpamoja.views.activities.NeedHelp;
 import com.julie.masizpamoja.views.activities.UpcomingEvents;
 
@@ -28,6 +29,7 @@ import butterknife.ButterKnife;
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
     private List<MainAction> actionList = new ArrayList<>();
     private Context context;
+
 
     public MainAdapter(List<MainAction> actionList, Context context) {
         this.actionList = actionList;
@@ -66,6 +68,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         TextView actionName;
 
 
+
+
+
+
+
         MainViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -87,14 +94,22 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         } else if (mainAction.getName().equalsIgnoreCase("Upcoming Events")) {
             Intent mainActionDetail = new Intent(context, UpcomingEvents.class);
             context.startActivity(mainActionDetail);
-        } else if (mainAction.getName().equalsIgnoreCase("Need Help")) {
+        }
+        else if (mainAction.getName().equalsIgnoreCase("Need Help")) {
+//            DialogFragment dialogFragment = NeedHelpFragment.newInstance();
+//            FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
+//            dialogFragment.show(manager, "tag");
+            Intent mainActionDetail = new Intent(context, ContactsActivity.class);
+            context.startActivity(mainActionDetail);
+
+        }else if (mainAction.getName().equalsIgnoreCase("More Info")) {
             Intent mainActionDetail = new Intent(context, NeedHelp.class);
             context.startActivity(mainActionDetail);
         } else if (mainAction.getName().equalsIgnoreCase("Chat Room")) {
             Intent mainActionDetail = new Intent(context, ChatRoomActivity.class);
             context.startActivity(mainActionDetail);
         }
-
-
     }
+
+
 }

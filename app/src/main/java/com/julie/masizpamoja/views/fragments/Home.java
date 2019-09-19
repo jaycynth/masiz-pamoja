@@ -1,6 +1,7 @@
 package com.julie.masizpamoja.views.fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.julie.masizpamoja.BuildConfig;
+import com.julie.masizpamoja.MainActivity;
 import com.julie.masizpamoja.R;
 import com.julie.masizpamoja.adapters.MainAdapter;
 import com.julie.masizpamoja.adapters.RandomBlogAdapter;
@@ -82,6 +84,17 @@ public class Home extends Fragment {
 
     private boolean isFABOpen = false;
 
+    public MainActivity activity;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            activity = (MainActivity) context;
+        } catch (ClassCastException ex) {
+            throw new ClassCastException(ex.getMessage() + "must implement AnyInterfaceName");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -91,6 +104,16 @@ public class Home extends Fragment {
         if (getActivity() != null) {
             getActivity().setTitle("Home");
         }
+
+//        Tovuti.from(activity).monitor((connectionType, isConnected, isFast) -> {
+//            if(!isConnected){
+//                Intent e = new Intent(activity, ErrorActivity.class);
+//                e.putExtra("TAG","HomeFragment");
+//                startActivity(e);
+//                getActivity().finish();
+//            }
+//        });
+
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 
@@ -199,7 +222,7 @@ public class Home extends Fragment {
         stopProgressBar();
 
         if (errorThrowable instanceof IOException) {
-            Toast.makeText(getActivity(), "network failure", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "You are currently offline", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
         }
@@ -234,4 +257,10 @@ public class Home extends Fragment {
 
 
 
+
+//    @Override
+//    public void onStop(){
+//        Tovuti.from(getActivity()).stop();
+//        super.onStop();
+//    }
 }

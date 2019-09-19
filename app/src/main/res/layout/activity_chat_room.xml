@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:clipToPadding="false"
     android:focusableInTouchMode="true"
+    android:background="#fafafa"
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView

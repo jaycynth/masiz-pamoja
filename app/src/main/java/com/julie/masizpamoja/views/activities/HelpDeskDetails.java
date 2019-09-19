@@ -1,32 +1,13 @@
 package com.julie.masizpamoja.views.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.julie.masizpamoja.R;
-import com.julie.masizpamoja.adapters.AllBlogsAdapter;
-import com.julie.masizpamoja.adapters.AllContactListAdapter;
-import com.julie.masizpamoja.models.AllContactList;
-import com.julie.masizpamoja.models.ContactList;
-import com.julie.masizpamoja.utils.SharedPreferencesManager;
-import com.julie.masizpamoja.viewmodels.HelpDeskViewModel;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,8 +20,8 @@ public class HelpDeskDetails extends AppCompatActivity {
 
 
 
-    @BindView(R.id.more_info)
-    FloatingActionButton moreInfo;
+//    @BindView(R.id.more_info)
+//    FloatingActionButton moreInfo;
 
 
 
@@ -68,9 +49,9 @@ public class HelpDeskDetails extends AppCompatActivity {
 
 
 
-      moreInfo.setOnClickListener(v->{
-          startActivity(new Intent(HelpDeskDetails.this,ContactsActivity.class));
-      });
+//      moreInfo.setOnClickListener(v->{
+//          startActivity(new Intent(HelpDeskDetails.this,ContactsActivity.class));
+//      });
 
 
     }
