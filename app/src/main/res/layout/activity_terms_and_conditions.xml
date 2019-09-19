@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_margin"
+    android:fillViewport="true"
+    tools:context=".views.activities.TermsAndConditions">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/medium_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terms And Conditions"
+            android:layout_gravity="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="General Conditions"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/medium_margin"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/terms"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account Creation And Deletion"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/medium_margin"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/terms2"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confidentiality"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/medium_margin"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+
+            android:text="@string/terms3"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/medium_margin"
+            android:text="Intellectual Property"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:textSize="16sp"
+
+            android:layout_height="wrap_content"
+            android:text="@string/terms4"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disclaimer"
+            android:layout_margin="@dimen/medium_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+
+            android:text="@string/terms5"/>
+
+    </LinearLayout>
+
+</ScrollView>

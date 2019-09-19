@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="@dimen/activity_margin"
+            android:textColor="@color/colorBlack"
             android:text="this is the blogs decription that will be used s test"
             android:id="@+id/blog_title"/>
     </com.google.android.material.card.MaterialCardView>

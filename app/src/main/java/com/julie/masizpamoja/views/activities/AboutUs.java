@@ -53,6 +53,8 @@ public class AboutUs extends AppCompatActivity {
         Toast.makeText(getBaseContext(), "Successfullly subscribed" , Toast.LENGTH_SHORT).show();
       });
       AlertDialog dialog = alert.create();
+      //dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorPrimary));
+
       dialog.show();
     });
 

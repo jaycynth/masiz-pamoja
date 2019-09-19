@@ -15,9 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.julie.masizpamoja.R;
 import com.julie.masizpamoja.models.Event;
-
 import com.julie.masizpamoja.views.activities.EventDetails;
-;
 
 import java.util.List;
 
@@ -25,6 +23,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.julie.masizpamoja.api.ApiEndpoints.EVENT_URL;
+
+;
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsViewHolder> {
 
@@ -56,6 +56,9 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
         if (text.length()>100) {
             text=text.substring(0,100)+"...";
             holder.DetailTv.setText(Html.fromHtml(text+"<font color='red'> <u>View More</u></font>"));
+
+        }else{
+            holder.DetailTv.setText(event.getDescription());
 
         }
 

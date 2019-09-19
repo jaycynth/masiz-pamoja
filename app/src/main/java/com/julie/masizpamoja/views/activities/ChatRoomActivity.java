@@ -36,7 +36,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.UUID;
 
 import static com.julie.masizpamoja.utils.Constants.CHAT_SERVER_URL;
 
@@ -134,12 +133,8 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         savedMessageViewModel = ViewModelProviders.of(this).get(SavedMessageViewModel.class);
 
-        if (SharedPreferencesManager.getInstance(this).getUniqueid() == null) {
-            uniqueId = UUID.randomUUID().toString();
-            SharedPreferencesManager.getInstance(this).saveUserId(uniqueId);
-        } else {
             uniqueId = SharedPreferencesManager.getInstance(this).getUniqueid();
-        }
+
 
         Log.i(TAG, "onCreate: " + uniqueId);
 

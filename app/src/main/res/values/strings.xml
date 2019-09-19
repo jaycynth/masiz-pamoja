@@ -29,8 +29,8 @@
     <string name="support">Support</string>
     <string name="logout">Logout</string>
     <string name="more_info">More Information</string>
-    <string name="who_are_we">Who are we...?</string>
-    <string name="what_do_we_do">What do we do....?</string>
+    <string name="who_are_we">Who we are .....</string>
+    <string name="what_do_we_do">What do we do ....</string>
     <string name="chat">Chat</string>
     <string name="title">Title</string>
     <string name="name">Name</string>
@@ -60,12 +60,6 @@
     <string name="who_are_we_description">We are an organization focused in unifying and connecting women to information and services designed to address the growing concern on matters affecting women such as Gender based violence and Sexual and Reproductive Health rights (SRHR).</string>
     <string name="be_part_of_us">Be Part Of US</string>
     <string name="our_core_values">Our Core Values</string>
-    <string-array name="core_values">
-                       <item>Trust</item>
-                           <item>Empathy</item>
-        <item>Support</item>
-        <item> Integrity</item>
-        <item> Boldness</item>    </string-array>
     <string name="mission">Our Mission</string>
     <string name="mission_values">To provide a platform that informs, voices, connects, supports and solves the health dilemmas, social evils, and pave way for justice for the various affected women.</string>
     <string name="vision">Our Vision</string>
@@ -78,14 +72,14 @@
     <string name="CurrentPassword">Current Password</string>
     <string name="new_password">New Password</string>
     <string name="write_a_message">Write a message</string>
-
-
     <string name="prompt_message">Message...</string>
+
+
     <string name="connect">Connected</string>
     <string name="disconnect">Disconnected, Please check your internet connection</string>
+    <string name="error_connect">Failed to connect</string>
 
     <!-- messages -->
-    <string name="error_connect">Failed to connect</string>
     <string name="message_welcome">Welcome to Socket.IO Chat –</string>
     <string name="message_user_joined">%s joined</string>
     <string name="message_user_left">%s left</string>
@@ -95,4 +89,31 @@
     <string name="moiuni">\@MoiUni</string>
     <string name="about_us">About us</string>
     <string name="need_help_image">need help image</string>
+    <string name="terms">
+This application ( Masiz Pamoja) is designed to assist in connecting the user to available services and programs as provided for under in the application.
+These terms and conditions ("Terms", "Agreement") are an agreement between Mobile Application Developer ("Masiz Pamoja International", "us", "we" or "our") and you ("User", "you" or "your"). This Agreement sets forth the general terms and conditions of your use of the Masiz Pamoja mobile application and any of its services for use
+You agree to our Terms of Service (“Terms”) by installing, accessing, or using our app services, features, (together, “Services”).
+The Company reserves the right to change these Terms and Conditions at any time and without prior notice. The Company will endeavor to inform you about major modifications to the Terms and Conditions.
+
+</string>
+    <string name="terms2">The Any party “user” willing to use this app must provide essential details and services must agree all data submitted through this application is given with the willing consent. The Company will accept no liability from third parties whatsoever, resulting from your providing incorrect or false data
+Any user is free to opt out of the service through a delete account option, at which time they cease to be a user</string>
+    <string name="terms3"> All information collected, shared and disseminated within the application are subject to confidentiality between the user, partners and other users within the platform
+Acceptable use of services
+You must access and use our Services only for legal, authorized, and acceptable purposes. You will not use (or assist others in using) our Services in ways that violate, misappropriate, or infringe our rights , our users, or others, including privacy, publicity, intellectual property, or other proprietary rights
+</string>
+    <string name="terms4">Any third party use of the information (Replication, duplication, and reproduction) provided for commercial gain or any other purpose without company’s consent shall be subjected to legal action.
+The company retains the right to withhold and dispense all information from all affiliate parties only including partners at their discretion
+Existing relationship between any of our partners and the former users solely exist at the discretion of said individual
+</string>
+    <string name="terms5">The company is NOT responsible for any unethical behavior or misconduct perpetrated by any user, partner. You use our services at your own risk. We do not warrant that any information provided by us is accurate, complete, or useful unless approved by a practitioner.
+    The company does not claim any responsibility for harm or distress that may come to the user
+    </string>
+    <string-array name="core_values">
+        <item>Trust</item>
+        <item>Empathy</item>
+        <item>Support</item>
+        <item> Integrity</item>
+        <item> Boldness</item>
+    </string-array>
 </resources>

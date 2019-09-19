@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="@dimen/medium_margin"
+    android:fillViewport="true"
     tools:context=".views.fragments.Contacts">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+
+        android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -38,7 +44,7 @@
             android:drawableStart="@drawable/ic_phone_black_24dp"
             android:drawablePadding="@dimen/medium_margin"
             android:layout_marginTop="4dp"
-            android:text="0718164782"/>
+            android:text="+2547 725 791 154"/>
 
 
 
@@ -72,7 +78,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="masizpamoja@gmail.com"
+                android:text="info@masizpamojainternational.co.ke"
                 android:layout_marginTop="4dp"
                 android:drawableStart="@drawable/ic_email_black_24dp"
                 android:drawablePadding="@dimen/medium_margin"
@@ -109,10 +115,154 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/medium_margin"
+                android:drawableStart="@drawable/ic_person_black_24dp"
+                android:drawablePadding="@dimen/medium_margin"
+                android:layout_marginTop="4dp"
+                android:text="Senior Counsellor : Rebecca"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
                 android:drawableStart="@drawable/ic_phone_black_24dp"
                 android:drawablePadding="@dimen/medium_margin"
                 android:layout_marginTop="4dp"
-                android:text="0718164782"/>
+                android:text="+2547 26421218"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_twitter"
+                android:text="@string/moiuni"
+                android:drawablePadding="@dimen/medium_margin"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="@dimen/medium_margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="moiuniversity@email.com"
+                android:drawableStart="@drawable/ic_email_black_24dp"
+                android:drawablePadding="@dimen/medium_margin"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:textColor="@color/colorPrimary"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorLightGray"
+                android:layout_margin="@dimen/medium_margin"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:drawableStart="@drawable/ic_person_black_24dp"
+                android:drawablePadding="@dimen/medium_margin"
+                android:layout_marginTop="6dp"
+                android:text="Chaplain : Reverend Ariko"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:drawableStart="@drawable/ic_phone_black_24dp"
+                android:drawablePadding="@dimen/medium_margin"
+                android:layout_marginTop="4dp"
+                android:text="+2547 14415032"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_twitter"
+                android:text="@string/moiuni"
+                android:drawablePadding="@dimen/medium_margin"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="@dimen/medium_margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="moiuniversity@email.com"
+                android:drawableStart="@drawable/ic_email_black_24dp"
+                android:drawablePadding="@dimen/medium_margin"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:textColor="@color/colorPrimary"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorLightGray"
+                android:layout_margin="@dimen/medium_margin"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:drawableStart="@drawable/ic_person_black_24dp"
+                android:drawablePadding="@dimen/medium_margin"
+                android:layout_marginTop="6dp"
+                android:text="Nurse : Shikanga"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:drawableStart="@drawable/ic_phone_black_24dp"
+                android:drawablePadding="@dimen/medium_margin"
+                android:layout_marginTop="4dp"
+                android:text="+2547 25882757 "/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_twitter"
+                android:text="@string/moiuni"
+                android:drawablePadding="@dimen/medium_margin"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="@dimen/medium_margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="moiuniversity@email.com"
+                android:drawableStart="@drawable/ic_email_black_24dp"
+                android:drawablePadding="@dimen/medium_margin"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:textColor="@color/colorPrimary"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorLightGray"
+                android:layout_margin="@dimen/medium_margin"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:drawableStart="@drawable/ic_person_black_24dp"
+                android:drawablePadding="@dimen/medium_margin"
+                android:layout_marginTop="6dp"
+                android:text="Chief Security : Obadiah Rotich"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:drawableStart="@drawable/ic_phone_black_24dp"
+                android:drawablePadding="@dimen/medium_margin"
+                android:layout_marginTop="4dp"
+                android:text="+2547 24136555 "/>
 
 
 
@@ -138,8 +288,9 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 
 
 
-</LinearLayout>
+</ScrollView>

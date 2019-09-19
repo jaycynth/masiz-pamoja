@@ -120,7 +120,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
         termsAndConditionsText.setOnClickListener(v -> {
-            Toast.makeText(this, "terms and conditions", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "terms and conditions", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(LoginActivity.this,TermsAndConditions.class));
         });
     }
 
@@ -154,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
             SharedPreferencesManager.getInstance(this).saveToken(allLogins.getAccessToken());
             SharedPreferencesManager.getInstance(this).saveNames(allLogins.getUser().getName());
             SharedPreferencesManager.getInstance(this).saveUserImage(allLogins.getUser().getProfile());
+            SharedPreferencesManager.getInstance(this).saveUserId(String.valueOf(allLogins.getUser().getId()));
 
 
             Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);

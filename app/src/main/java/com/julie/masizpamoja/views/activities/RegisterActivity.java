@@ -1,25 +1,20 @@
 package com.julie.masizpamoja.views.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
-import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.julie.masizpamoja.MainActivity;
 import com.julie.masizpamoja.R;
-import com.julie.masizpamoja.models.Errors;
 import com.julie.masizpamoja.models.Register;
 import com.julie.masizpamoja.models.RegisterUnprocessableEntity;
 import com.julie.masizpamoja.utils.SharedPreferencesManager;
@@ -123,6 +118,8 @@ public class RegisterActivity extends AppCompatActivity {
             SharedPreferencesManager.getInstance(this).saveToken(allNewUsers.getAccessToken());
             SharedPreferencesManager.getInstance(this).saveNames(allNewUsers.getUser().getName());
             SharedPreferencesManager.getInstance(this).saveEmail(allNewUsers.getUser().getEmail());
+            SharedPreferencesManager.getInstance(this).saveUserId(String.valueOf(allNewUsers.getUser().getId()));
+
 
 
             Intent navIntent = new Intent(RegisterActivity.this, MainActivity.class);
