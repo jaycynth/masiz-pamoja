@@ -81,7 +81,11 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
+        termsAndConditionsText.setOnClickListener(v -> {
+            //Toast.makeText(this, "terms and conditions", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(LoginActivity.this, TermsAndConditions.class));
 
+        });
 
         register.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
@@ -119,10 +123,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-        termsAndConditionsText.setOnClickListener(v -> {
-            //Toast.makeText(this, "terms and conditions", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(LoginActivity.this,TermsAndConditions.class));
-        });
+
     }
 
 

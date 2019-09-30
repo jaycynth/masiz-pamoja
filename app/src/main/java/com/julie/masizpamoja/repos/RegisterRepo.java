@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import com.julie.masizpamoja.BuildConfig;
 import com.julie.masizpamoja.api.ApiClient;
 import com.julie.masizpamoja.datastates.RegisterState;
+import com.julie.masizpamoja.models.NotFound;
 import com.julie.masizpamoja.models.Register;
 import com.julie.masizpamoja.models.RegisterUnprocessableEntity;
 
@@ -45,6 +46,11 @@ public class RegisterRepo {
           Type type = new TypeToken<RegisterUnprocessableEntity>() {}.getType();
           RegisterUnprocessableEntity authErrorResponse = gson.fromJson(response.errorBody().charStream(),type);
           registerStateMutableLiveData.setValue(new RegisterState(authErrorResponse));
+        }else if(response.code() == 404){
+          Gson gson = new Gson();
+          Type type = new TypeToken<NotFound>() {}.getType();
+          NotFound notFound = gson.fromJson(response.errorBody().charStream(),type);
+          registerStateMutableLiveData.setValue(new RegisterState(notFound));
         }
         else {
           if (BuildConfig.DEBUG){

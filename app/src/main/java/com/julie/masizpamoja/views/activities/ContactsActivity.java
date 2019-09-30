@@ -1,18 +1,17 @@
 package com.julie.masizpamoja.views.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.julie.masizpamoja.R;
 import com.julie.masizpamoja.adapters.AllContactListAdapter;
@@ -49,6 +48,9 @@ public class ContactsActivity extends AppCompatActivity {
     ProgressBar circularProgressBar;
 
     String accessToken;
+
+    @BindView(R.id.no_contacts)
+    TextView noContacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +102,12 @@ public class ContactsActivity extends AppCompatActivity {
         boolean status = allContactList.getStatus();
         if(status){
             contactLists = allContactList.getContactList();
-            initView(contactLists);
+
+            if(contactLists.isEmpty()){
+                noContacts.setVisibility(View.VISIBLE);
+            }else {
+                initView(contactLists);
+            }
         }
 
     }

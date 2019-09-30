@@ -15,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.julie.masizpamoja.MainActivity;
 import com.julie.masizpamoja.R;
+import com.julie.masizpamoja.models.NotFound;
 import com.julie.masizpamoja.models.Register;
 import com.julie.masizpamoja.models.RegisterUnprocessableEntity;
 import com.julie.masizpamoja.utils.SharedPreferencesManager;
@@ -80,6 +81,9 @@ public class RegisterActivity extends AppCompatActivity {
                 handleUnprocessableEntity(registerState.getRegisterUnprocessableEntity()
                 );
             }
+            if(registerState.getNotFound() != null){
+                handleNotFound(registerState.getNotFound());
+            }
         });
 
 
@@ -92,11 +96,14 @@ public class RegisterActivity extends AppCompatActivity {
             String email = emailEdit.getText().toString().trim();
             String password = passwordEdit.getText().toString().trim();
 
-            registerUser(email, password, fullNames);
-            hideKeyboard();
+                registerUser(email, password, fullNames);
+                hideKeyboard();
+
 
         });
     }
+
+
 
     private void hideKeyboard() {
         try {
@@ -121,6 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
             SharedPreferencesManager.getInstance(this).saveUserId(String.valueOf(allNewUsers.getUser().getId()));
 
 
+            Toast.makeText(this, allNewUsers.getMessage(), Toast.LENGTH_SHORT).show();
 
             Intent navIntent = new Intent(RegisterActivity.this, MainActivity.class);
             navIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -130,6 +138,16 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
     }
+
+    private void handleNotFound(NotFound notFound) {
+        signUpBtn.startMorphRevertAnimation();
+        boolean status = notFound.getStatus();
+
+        if(!status) {
+            Toast.makeText(this, notFound.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     private void handleNetworkResponse(String message) {
         signUpBtn.startMorphRevertAnimation();
@@ -156,11 +174,12 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private void registerUser(String email, String password, String fullNames) {
-        signUpBtn.startMorphAnimation();
 
         if (!validateInputs(email, password, fullNames)) {
             return;
         }
+
+        signUpBtn.startMorphAnimation();
         registerViewModel.createUser(email, password, fullNames);
 
 

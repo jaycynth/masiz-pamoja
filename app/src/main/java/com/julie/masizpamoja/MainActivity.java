@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     String accessToken;
 
-    boolean doubleBackToExitPressedOnce;
+    boolean doubleBackToExitPressedOnce = false;
 
 
     TextView navEmail;
@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             Intent homeIntent = new Intent(this, LoginActivity.class);
             startActivity(homeIntent);
+            finish();
         }
 
 
@@ -229,10 +230,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         if (mDrawer.isDrawerOpen(GravityCompat.START) || fragmentManager.getBackStackEntryCount() > 0) {
             mDrawer.closeDrawer(GravityCompat.START);
-
-            fragmentManager.popBackStack();
-
-
+            fragmentManager.popBackStackImmediate();
         }
         else if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
