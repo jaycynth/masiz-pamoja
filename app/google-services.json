@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "997598913571",
+    "firebase_url": "https://masizpamoja.firebaseio.com",
+    "project_id": "masizpamoja",
+    "storage_bucket": "masizpamoja.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997598913571:android:817c55fd29bfc3a551bd96",
+        "android_client_info": {
+          "package_name": "com.julie.masizpamoja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997598913571-u0mvg4u3p8b8s5kfr4cbcpqloim4j6g2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.julie.masizpamoja",
+            "certificate_hash": "a5d6803c2344190afca52b9eb4f6aa6e1fed1a90"
+          }
+        },
+        {
+          "client_id": "997598913571-e293ickdt7lgtc77pch2vvq69m6jr579.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKtABUitdK6BZQM-tsk8Y3IiQHFQE5Azo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997598913571-e293ickdt7lgtc77pch2vvq69m6jr579.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

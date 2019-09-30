@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'io.fabric'
+
 
 android {
     compileSdkVersion 29
@@ -10,6 +13,8 @@ android {
         versionCode 2
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
     }
     buildTypes {
         release {
@@ -37,8 +42,8 @@ dependencies {
     implementation 'com.android.support:design:29.0.0'
 
     //for bindView
-    implementation 'com.jakewharton:butterknife:9.0.0-SNAPSHOT'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-SNAPSHOT'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
 
     implementation 'com.karumi:dexter:5.0.0'
 
@@ -81,6 +86,15 @@ dependencies {
     implementation 'com.rom4ek:arcnavigationview:1.0.3'
 
     implementation 'com.github.jumadeveloper:networkmanager:0.0.2'
+
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
+
+    implementation ('com.google.firebase:firebase-core:17.2.0'){
+        exclude group: 'com.google.android.gms'
+
+    }
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
 
 
 }
