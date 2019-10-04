@@ -1,10 +1,5 @@
 package com.julie.masizpamoja.views.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,13 +7,17 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.julie.masizpamoja.R;
 import com.julie.masizpamoja.adapters.AllBlogsAdapter;
 import com.julie.masizpamoja.models.AllBlogs;
 import com.julie.masizpamoja.models.Blog;
 import com.julie.masizpamoja.utils.SharedPreferencesManager;
 import com.julie.masizpamoja.viewmodels.BlogsViewModel;
-
 
 import java.io.IOException;
 import java.util.List;
@@ -65,7 +64,6 @@ public class Blogs extends AppCompatActivity {
         blogsViewModel.getAllBlogsResponse().observe(this, allBlogsState -> {
 
             if (allBlogsState.getAllBlogs() != null) {
-
                 handleAllBlogs(allBlogsState.getAllBlogs());
             }
 
