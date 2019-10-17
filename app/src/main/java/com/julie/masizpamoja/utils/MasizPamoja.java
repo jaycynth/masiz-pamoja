@@ -10,19 +10,6 @@ public class MasizPamoja extends Application {
 
     private static MasizPamoja mInstance;
 
-//    private Socket mSocket;
-//    {
-//        try {
-//            mSocket = IO.socket(Constants.CHAT_SERVER_URL);
-//        } catch (URISyntaxException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-//
-//    public Socket getSocket() {
-//        return mSocket;
-//    }
-
 
     @Override
     public void onCreate() {

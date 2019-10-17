@@ -5,11 +5,12 @@ import com.julie.masizpamoja.models.AllContactList;
 import com.julie.masizpamoja.models.AllEvents;
 import com.julie.masizpamoja.models.EntryHelpDesk;
 import com.julie.masizpamoja.models.ForgotPassword;
-import com.julie.masizpamoja.models.HelpDesk;
+import com.julie.masizpamoja.models.GetAllChats;
 import com.julie.masizpamoja.models.LatestBlogs;
 import com.julie.masizpamoja.models.Login;
 import com.julie.masizpamoja.models.Logout;
 import com.julie.masizpamoja.models.Register;
+import com.julie.masizpamoja.models.SentMessage;
 import com.julie.masizpamoja.models.Support;
 import com.julie.masizpamoja.models.UpdatePassword;
 
@@ -97,6 +98,21 @@ public interface ApiService {
     Call<AllContactList> getAllContactList(
             @Header("Authorization") String accessToken
     );
+
+
+    @Headers({"Accept: application/json"})
+    @GET("messages")
+    Call<GetAllChats> getAllMessages(
+            @Header("Authorization") String accessToken);
+
+
+    @Headers({"Accept: application/json"})
+    @FormUrlEncoded
+    @POST("messages")
+    Call<SentMessage> postMessage(
+            @Field("message") String message,
+            @Header("Authorization") String accessToken);
+
 
 
 }

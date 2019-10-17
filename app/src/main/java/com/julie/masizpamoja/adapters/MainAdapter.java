@@ -15,9 +15,9 @@ import com.bumptech.glide.Glide;
 import com.julie.masizpamoja.R;
 import com.julie.masizpamoja.models.MainAction;
 import com.julie.masizpamoja.views.activities.Blogs;
-import com.julie.masizpamoja.views.activities.ChatRoomActivity;
 import com.julie.masizpamoja.views.activities.ContactsActivity;
 import com.julie.masizpamoja.views.activities.NeedHelp;
+import com.julie.masizpamoja.views.activities.PusherChatRoomActivity;
 import com.julie.masizpamoja.views.activities.UpcomingEvents;
 
 import java.util.ArrayList;
@@ -106,7 +106,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
             Intent mainActionDetail = new Intent(context, NeedHelp.class);
             context.startActivity(mainActionDetail);
         } else if (mainAction.getName().equalsIgnoreCase("Chat Room")) {
-            Intent mainActionDetail = new Intent(context, ChatRoomActivity.class);
+            Intent mainActionDetail = new Intent(context, PusherChatRoomActivity.class);
             context.startActivity(mainActionDetail);
         }
     }

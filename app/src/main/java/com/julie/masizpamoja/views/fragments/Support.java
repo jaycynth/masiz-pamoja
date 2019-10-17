@@ -77,7 +77,7 @@ public class Support extends Fragment {
             if (TextUtils.isEmpty(subject)) {
                 Toast.makeText(getActivity(), "Enter a subject before you proceed", Toast.LENGTH_SHORT).show();
             } else if (TextUtils.isEmpty(message)) {
-                Toast.makeText(getActivity(), "Enter Message before proceeding", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Enter Messsage before proceeding", Toast.LENGTH_SHORT).show();
             } else {
                 submit.startMorphAnimation();
                 supportViewModel.support(subject, email, message, "Bearer " + accessToken);

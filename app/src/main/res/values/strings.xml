@@ -38,7 +38,7 @@
     <string name="issue_title">Title of  Issue</string>
     <string name="getPhoto">Add Photo</string>
     <string name="Done">done</string>
-    <string name="message">Message : </string>
+    <string name="messsage">Message : </string>
     <string name="submit">Submit</string>
     <string name="enter_name_error">Enter a name</string>
     <string name="enter_email_error">Enter an email</string>
@@ -71,7 +71,7 @@
     <string name="done">Done</string>
     <string name="CurrentPassword">Current Password</string>
     <string name="new_password">New Password</string>
-    <string name="write_a_message">Write a message</string>
+    <string name="write_a_message">Write a messsage</string>
     <string name="prompt_message">Message...</string>
 
 
@@ -79,7 +79,7 @@
     <string name="disconnect">Disconnected, Please check your internet connection</string>
     <string name="error_connect">Failed to connect</string>
 
-    <!-- messages -->
+    <!-- messsages -->
     <string name="message_welcome">Welcome to Socket.IO Chat –</string>
     <string name="message_user_joined">%s joined</string>
     <string name="message_user_left">%s left</string>
@@ -109,6 +109,8 @@ Existing relationship between any of our partners and the former users solely ex
     <string name="terms5">The company is NOT responsible for any unethical behavior or misconduct perpetrated by any user, partner. You use our services at your own risk. We do not warrant that any information provided by us is accurate, complete, or useful unless approved by a practitioner.
     The company does not claim any responsibility for harm or distress that may come to the user
     </string>
+    <string name="enter_messsage">Enter messsage</string>
+    <string name="send">SEND</string>
     <string-array name="core_values">
         <item>Trust</item>
         <item>Empathy</item>
